@@ -9,11 +9,23 @@ import com.example.android.galladda.View.GameView;
 
 public class MainActivity extends AppCompatActivity {
 
+    GameController gameController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GameController gameController = new GameController(this);
+        gameController = new GameController(this);
         setContentView(gameController.getGameView());
+    }
+
+    public void onResume(){
+        super.onResume();
+        gameController.getGameView().resume();
+    }
+
+    public void onPause(){
+        super.onPause();
+        gameController.getGameView().pause();
     }
 
     // Used to load the 'native-lib' library on application startup.

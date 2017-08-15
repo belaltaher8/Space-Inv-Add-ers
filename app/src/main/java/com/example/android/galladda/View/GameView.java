@@ -3,7 +3,9 @@ package com.example.android.galladda.View;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -28,12 +30,12 @@ public class GameView extends SurfaceView implements Runnable {
         super(context);
         ourHolder = getHolder();
         myPaint = new Paint();
+        playing = true;
     }
 
     public void run(){
         while (playing){
             long startFrameTime = System.currentTimeMillis();
-            update();
             draw();
             timeThisFrame = System.currentTimeMillis() - startFrameTime;
             if(timeThisFrame > 0){
@@ -42,12 +44,27 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
 
-    public void update(){
-
+    public void draw(){
+        if(ourHolder.getSurface().isValid()){
+            myCanvas = ourHolder.lockCanvas();
+            myCanvas.drawColor(Color.argb(255,26,128,182));
+            ourHolder.unlockCanvasAndPost(myCanvas);
+        }
     }
 
-    public void draw(){
+    public void pause(){
+        playing = false;
+        try{
+            gameThread.join();
+        } catch (InterruptedException e){
+            Log.e("Error:", "joining thread");
+        }
+    }
 
+    public void resume(){
+        playing = true;
+        gameThread = new Thread(this);
+        gameThread.start();
     }
 
 }
