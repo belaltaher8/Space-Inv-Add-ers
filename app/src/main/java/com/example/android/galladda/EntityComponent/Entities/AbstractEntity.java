@@ -12,7 +12,7 @@ import java.util.HashSet;
 
 public abstract class AbstractEntity {
 
-    private HashMap<ComponentType, IComponent> myComponents;
+    protected HashMap<ComponentType, IComponent> myComponents;
 
     public IComponent getComponent(ComponentType myType) {
         if (myComponents.get(myType) != null) {
