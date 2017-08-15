@@ -10,7 +10,7 @@ import com.example.android.galladda.EntityComponent.Components.VelocityComponent
  */
 
 public class PlayerEntity extends AbstractEntity {
-
+//just checking to see if github desktop works
     public PlayerEntity(){
         super();
         myComponents.put(ComponentType.Position, new PositionComponent(0,0));
