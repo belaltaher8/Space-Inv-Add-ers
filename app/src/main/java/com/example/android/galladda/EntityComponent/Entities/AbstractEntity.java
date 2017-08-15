@@ -14,6 +14,10 @@ public abstract class AbstractEntity {
 
     protected HashMap<ComponentType, IComponent> myComponents;
 
+    public AbstractEntity(){
+        myComponents = new HashMap<ComponentType, IComponent>();
+    }
+
     public IComponent getComponent(ComponentType myType) {
         if (myComponents.get(myType) != null) {
             return myComponents.get(myType);

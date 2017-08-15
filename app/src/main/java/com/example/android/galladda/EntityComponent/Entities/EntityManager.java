@@ -46,6 +46,6 @@ public class EntityManager{
     private void addPlayer(){
         ArrayList<AbstractEntity> myPlayers = new ArrayList<AbstractEntity>();
         myPlayers.add(new PlayerEntity());
-        myEntities.put(EntityType.Player,myPlayers);
+        myEntities.put(EntityType.Player, myPlayers);
     }
 }

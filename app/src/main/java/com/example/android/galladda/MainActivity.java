@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.android.galladda.GameController.GameController;
 import com.example.android.galladda.View.GameView;
 
 public class MainActivity extends AppCompatActivity {
@@ -11,9 +12,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GameView gameView = new GameView(this);
-        setContentView(gameView);
-
+        GameController gameController = new GameController(this);
+        setContentView(gameController.getGameView());
     }
 
     // Used to load the 'native-lib' library on application startup.

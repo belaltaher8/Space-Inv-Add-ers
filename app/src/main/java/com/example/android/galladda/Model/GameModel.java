@@ -22,11 +22,16 @@ public class GameModel {
         attachEngines(myLevelHandler.getCurrentLevelEM());
     }
 
+    public EntityManager getModelEntityManager(){
+        return myLevelHandler.getCurrentLevelEM();
+    }
+
     private void attachEngines(EntityManager myEM){
-        //myEngines.add(new MovementEngine(myEM));
+        myEngines.add(new MovementEngine(myEM));
     }
 
     private void initializeLevelHandler(){
         myLevelHandler = new LevelHandler();
     }
+
 }
