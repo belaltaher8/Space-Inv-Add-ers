@@ -28,10 +28,6 @@ public class GameModel {
         }
     }
 
-    public EntityManager getModelEntityManager(){
-        return myEM;
-    }
-
     private void attachEngines(EntityManager myEM){
         myEngines.add(new MovementEngine(myEM));
     }

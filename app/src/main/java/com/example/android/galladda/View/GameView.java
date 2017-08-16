@@ -1,5 +1,6 @@
 package com.example.android.galladda.View;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,6 +14,10 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
@@ -21,13 +26,16 @@ import com.example.android.galladda.EntityComponent.Entities.EntityManager;
 import com.example.android.galladda.R;
 
 import static android.R.attr.bitmap;
+import static com.example.android.galladda.R.id.MovementButtons;
+import static java.security.AccessController.getContext;
 
 /**
  * Created by Belal Taher on 8/14/2017.
  */
 
-public class GameView extends SurfaceView {
+public class GameView extends LinearLayout {
 
+    private SurfaceView myGameScreen;
     private SurfaceHolder ourHolder;
 
     private Canvas myCanvas;
@@ -39,13 +47,88 @@ public class GameView extends SurfaceView {
 
     public GameView(Context context, EntityManager aEM){
         super(context);
-        ourHolder = getHolder();
-        myPaint = new Paint();
+        setOrientation(LinearLayout.VERTICAL);
+        setUpSurfaceView(context);
+        setUpMovementPanel(context);
         myEM = aEM;
-        createPlayerView();
+        createPlayerBitmap();
     }
 
-    private void createPlayerView(){
+    private void setUpSurfaceView(Context context){
+        myGameScreen = new SurfaceView(context);
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                0,
+                8.0f
+        );
+        myGameScreen.setLayoutParams(param);
+        this.addView(myGameScreen);
+        ourHolder = myGameScreen.getHolder();
+        myPaint = new Paint();
+    }
+
+    private void setUpMovementPanel(Context context){
+        LinearLayout movementPanel = new LinearLayout(context);
+        LinearLayout.LayoutParams panelParam = new LinearLayout.LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                0,
+                1.0f
+        );
+        movementPanel.setLayoutParams(panelParam);
+        movementPanel.setBackgroundColor(Color.RED);
+        movementPanel.setOrientation(LinearLayout.HORIZONTAL);
+        Button leftButton = new Button(context);
+        Button rightButton = new Button(context);
+        LinearLayout.LayoutParams buttonParam = new LinearLayout.LayoutParams(
+                0,
+                LayoutParams.MATCH_PARENT,
+                1.0f
+        );
+        leftButton.setLayoutParams(buttonParam);
+        rightButton.setLayoutParams(buttonParam);
+        leftButton.setBackgroundColor(Color.BLACK);
+        rightButton.setBackgroundColor(Color.BLUE);
+
+        leftButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                VelocityComponent playerVC = (VelocityComponent) myEM.getPlayerOne().getComponent(ComponentType.Velocity);
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        playerVC.setX(-10);
+                        return true; // if you want to handle the touch event
+                    case MotionEvent.ACTION_UP:
+                        playerVC.setX(0);
+                        return true; // if you want to handle the touch event
+                }
+                return false;
+            }
+        });
+
+        rightButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                VelocityComponent playerVC = (VelocityComponent) myEM.getPlayerOne().getComponent(ComponentType.Velocity);
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        playerVC.setX(10);
+                        return true; // if you want to handle the touch event
+                    case MotionEvent.ACTION_UP:
+                        playerVC.setX(0);
+                        return true; // if you want to handle the touch event
+                }
+                return false;
+            }
+        });
+
+        movementPanel.addView(leftButton);
+        movementPanel.addView(rightButton);
+
+        this.addView(movementPanel);
+    }
+
+
+    private void createPlayerBitmap(){
         bitmapShip = BitmapFactory.decodeResource(this.getResources(), R.drawable.ship);
         bitmapShip = bitmapShip.createScaledBitmap(bitmapShip,150,150,false);
         PositionComponent playerPC = (PositionComponent) myEM.getPlayerOne().getComponent(ComponentType.Position);
@@ -53,8 +136,10 @@ public class GameView extends SurfaceView {
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
-        playerPC.setX(width/2-75);
-        playerPC.setY(height/1.3f);
+      //  playerPC.setX(width/2-75);
+        //playerPC.setY(height/1.3f);
+        playerPC.setX(0);
+        playerPC.setY(0);
     }
 
 
@@ -70,7 +155,7 @@ public class GameView extends SurfaceView {
     }
 
 
-    public boolean onTouchEvent(MotionEvent motionEvent){
+    /*public boolean onTouchEvent(MotionEvent motionEvent){
         VelocityComponent playerVC = (VelocityComponent) myEM.getPlayerOne().getComponent(ComponentType.Velocity);
         switch(motionEvent.getAction() & MotionEvent.ACTION_MASK){
             case MotionEvent.ACTION_DOWN:
@@ -82,6 +167,6 @@ public class GameView extends SurfaceView {
                 break;
         }
         return true;
-    }
+    }*/
 
 }
