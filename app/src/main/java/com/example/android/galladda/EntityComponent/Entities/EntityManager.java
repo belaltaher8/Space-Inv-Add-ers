@@ -2,12 +2,13 @@ package com.example.android.galladda.EntityComponent.Entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
 
 /**
  * Created by Belal Taher on 8/15/2017.
  */
 
-public class EntityManager{
+public class EntityManager {
 
     private HashMap<EntityType, ArrayList<AbstractEntity>> myEntities;
 
@@ -48,4 +49,10 @@ public class EntityManager{
         myPlayers.add(new PlayerEntity());
         myEntities.put(EntityType.Player, myPlayers);
     }
+
+    public PlayerEntity getPlayerOne(){
+        return (PlayerEntity) myEntities.get(EntityType.Player).get(0);
+    }
+
+
 }

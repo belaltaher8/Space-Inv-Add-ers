@@ -20,6 +20,10 @@ public abstract class AbstractEngine{
         myEM = aEM;
     }
 
+    public void update(){
+
+    }
+
     public void attachEM(EntityManager aEM){
         myEM = aEM;
     }

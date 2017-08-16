@@ -6,27 +6,27 @@ package com.example.android.galladda.EntityComponent.Components;
 
 public class PositionComponent implements IComponent {
 
-    private int myX;
-    private int myY;
+    private float myX;
+    private float myY;
 
-    public PositionComponent(int x, int y){
+    public PositionComponent(float x, float y){
         myX = x;
         myY = y;
     }
 
-    public void setX(int newX){
+    public void setX(float newX){
         myX = newX;
     }
 
-    public void setY(int newY){
+    public void setY(float newY){
         myY = newY;
     }
 
-    public int getX(){
+    public float getX(){
         return myX;
     }
 
-    public int getY(){
+    public float getY(){
         return myY;
     }
 

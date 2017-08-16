@@ -20,12 +20,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void onResume(){
         super.onResume();
-        gameController.getGameView().resume();
+        gameController.resume();
     }
 
     public void onPause(){
         super.onPause();
-        gameController.getGameView().pause();
+        gameController.pause();
     }
 
     // Used to load the 'native-lib' library on application startup.

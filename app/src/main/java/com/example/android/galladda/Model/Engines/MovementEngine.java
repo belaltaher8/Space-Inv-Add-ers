@@ -31,7 +31,6 @@ public class MovementEngine extends AbstractEngine {
         for(AbstractEntity e : players){
             PositionComponent myPC = (PositionComponent) e.getComponent(ComponentType.Position);
             VelocityComponent myVC = (VelocityComponent) e.getComponent(ComponentType.Velocity);
-
             myPC.setX(myPC.getX() + myVC.getX());
         }
     }

@@ -1,4 +1,6 @@
-package com.example.android.galladda.Model;
+package com.example.android.galladda.GameController;
+
+import android.util.DisplayMetrics;
 
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;

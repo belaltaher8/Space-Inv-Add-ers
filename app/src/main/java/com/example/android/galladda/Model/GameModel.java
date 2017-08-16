@@ -14,24 +14,25 @@ import java.util.ArrayList;
 public class GameModel {
 
     private ArrayList<AbstractEngine> myEngines;
-    private LevelHandler myLevelHandler;
+    private EntityManager myEM;
 
-    public GameModel(){
+    public GameModel(EntityManager aEM){
         myEngines = new ArrayList<AbstractEngine>();
-        initializeLevelHandler();
-        attachEngines(myLevelHandler.getCurrentLevelEM());
+        myEM = aEM;
+        attachEngines(myEM);
+    }
+
+    public void update(){
+        for(AbstractEngine engine : myEngines){
+            engine.update();
+        }
     }
 
     public EntityManager getModelEntityManager(){
-        return myLevelHandler.getCurrentLevelEM();
+        return myEM;
     }
 
     private void attachEngines(EntityManager myEM){
         myEngines.add(new MovementEngine(myEM));
     }
-
-    private void initializeLevelHandler(){
-        myLevelHandler = new LevelHandler();
-    }
-
 }
