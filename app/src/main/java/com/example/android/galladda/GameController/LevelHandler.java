@@ -23,7 +23,7 @@ public class LevelHandler {
     }
 
     private void initializeLevelOne(){
-        PlayerEntity myPlayer = (PlayerEntity) currentLevelEM.getPlayers().get(0);
+        PlayerEntity myPlayer = currentLevelEM.getPlayerOne();
         PositionComponent playerPos = (PositionComponent) myPlayer.getComponent(ComponentType.Position);
         playerPos.setX(0);
         playerPos.setY(0);

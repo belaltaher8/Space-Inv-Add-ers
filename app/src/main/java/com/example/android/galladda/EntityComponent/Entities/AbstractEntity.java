@@ -1,5 +1,7 @@
 package com.example.android.galladda.EntityComponent.Entities;
 
+import android.graphics.Bitmap;
+
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.IComponent;
 

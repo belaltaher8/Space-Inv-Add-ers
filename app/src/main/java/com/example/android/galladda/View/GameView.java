@@ -22,12 +22,19 @@ import android.widget.LinearLayout;
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
 import com.example.android.galladda.EntityComponent.Components.VelocityComponent;
+import com.example.android.galladda.EntityComponent.Entities.AbstractEntity;
+import com.example.android.galladda.EntityComponent.Entities.BulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.EntityManager;
+import com.example.android.galladda.EntityComponent.Entities.EntityType;
+import com.example.android.galladda.EntityComponent.Entities.PlayerEntity;
 import com.example.android.galladda.R;
 
-import static android.R.attr.bitmap;
-import static com.example.android.galladda.R.id.MovementButtons;
-import static java.security.AccessController.getContext;
+import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
+import static com.example.android.galladda.EntityComponent.Entities.EntityType.Bullet;
+import static com.example.android.galladda.EntityComponent.Entities.EntityType.Player;
+
 
 /**
  * Created by Belal Taher on 8/14/2017.
@@ -43,7 +50,8 @@ public class GameView extends LinearLayout {
 
     private EntityManager myEM;
 
-    private Bitmap bitmapShip;
+    private Bitmap bitmapShip = BitmapFactory.decodeResource(this.getResources(), R.drawable.ship);
+    private final Bitmap bitmapBullet = BitmapFactory.decodeResource(this.getResources(), R.drawable.bullet);
 
     public GameView(Context context, EntityManager aEM){
         super(context);
@@ -65,6 +73,7 @@ public class GameView extends LinearLayout {
         this.addView(myGameScreen);
         ourHolder = myGameScreen.getHolder();
         myPaint = new Paint();
+
     }
 
     private void setUpMovementPanel(Context context){
@@ -79,6 +88,7 @@ public class GameView extends LinearLayout {
         movementPanel.setOrientation(LinearLayout.HORIZONTAL);
         Button leftButton = new Button(context);
         Button rightButton = new Button(context);
+        Button shootButton = new Button(context);
         LinearLayout.LayoutParams buttonParam = new LinearLayout.LayoutParams(
                 0,
                 LayoutParams.MATCH_PARENT,
@@ -86,8 +96,10 @@ public class GameView extends LinearLayout {
         );
         leftButton.setLayoutParams(buttonParam);
         rightButton.setLayoutParams(buttonParam);
-        leftButton.setBackgroundColor(Color.BLACK);
-        rightButton.setBackgroundColor(Color.BLUE);
+        shootButton.setLayoutParams(buttonParam);
+        leftButton.setBackgroundColor(Color.GREEN);
+        rightButton.setBackgroundColor(Color.RED);
+        shootButton.setBackgroundColor(Color.BLACK);
 
         leftButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -121,52 +133,60 @@ public class GameView extends LinearLayout {
             }
         });
 
+        shootButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BulletEntity newBullet = myEM.getPlayerOne().shoot();
+                myEM.addBullet(newBullet);
+            }
+
+        });
+
         movementPanel.addView(leftButton);
+        movementPanel.addView(shootButton);
         movementPanel.addView(rightButton);
 
         this.addView(movementPanel);
     }
 
 
-    private void createPlayerBitmap(){
-        bitmapShip = BitmapFactory.decodeResource(this.getResources(), R.drawable.ship);
+    public void createPlayerBitmap(){
         bitmapShip = bitmapShip.createScaledBitmap(bitmapShip,150,150,false);
         PositionComponent playerPC = (PositionComponent) myEM.getPlayerOne().getComponent(ComponentType.Position);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
-      //  playerPC.setX(width/2-75);
-        //playerPC.setY(height/1.3f);
-        playerPC.setX(0);
-        playerPC.setY(0);
+        playerPC.setX(width/2-75);
+        playerPC.setY(height/1.5f);
     }
 
 
     public void draw(){
-        if(ourHolder.getSurface().isValid()){
+        if(ourHolder.getSurface().isValid()) {
             myCanvas = ourHolder.lockCanvas();
-            myCanvas.drawColor(Color.argb(255,26,128,182));
-            myPaint.setColor(Color.argb(255,249,129,0));
-            PositionComponent playerPC = (PositionComponent) myEM.getPlayerOne().getComponent(ComponentType.Position);
-            myCanvas.drawBitmap(bitmapShip, playerPC.getX(), playerPC.getY(), myPaint);
+            myCanvas.drawColor(Color.argb(255, 26, 128, 182));
+            myPaint.setColor(Color.argb(255, 249, 129, 0));
+            for (EntityType ET : EntityType.values()){
+
+                ArrayList<AbstractEntity> entities = myEM.getEntitiesOfType(ET);
+
+                for(int currentEntityToDrawIndex = 0; currentEntityToDrawIndex < entities.size(); currentEntityToDrawIndex++){
+                    if(ET.equals(EntityType.Player)){
+                        PlayerEntity player = (PlayerEntity) entities.get(currentEntityToDrawIndex);
+                        PositionComponent playerPC = (PositionComponent) player.getComponent(ComponentType.Position);
+                        myCanvas.drawBitmap(bitmapShip, playerPC.getX(), playerPC.getY(), myPaint);
+                    }
+                    if(ET.equals(Bullet)){
+                        BulletEntity currentBullet = (BulletEntity) entities.get(currentEntityToDrawIndex);
+                        PositionComponent bulletPC = (PositionComponent) currentBullet.getComponent(ComponentType.Position);
+                        myCanvas.drawBitmap(bitmapBullet, bulletPC.getX(), bulletPC.getY() ,myPaint);
+                    }
+                }
+            }
             ourHolder.unlockCanvasAndPost(myCanvas);
         }
     }
 
-
-    /*public boolean onTouchEvent(MotionEvent motionEvent){
-        VelocityComponent playerVC = (VelocityComponent) myEM.getPlayerOne().getComponent(ComponentType.Velocity);
-        switch(motionEvent.getAction() & MotionEvent.ACTION_MASK){
-            case MotionEvent.ACTION_DOWN:
-                playerVC.setX(10);
-                break;
-
-            case MotionEvent.ACTION_UP:
-                playerVC.setX(0);
-                break;
-        }
-        return true;
-    }*/
 
 }

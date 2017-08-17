@@ -15,37 +15,23 @@ public class EntityManager {
     public EntityManager(){
         myEntities = new HashMap<EntityType, ArrayList<AbstractEntity>>();
         for(EntityType ET : EntityType.values()){
-            myEntities.put(ET, null);
+            myEntities.put(ET, new ArrayList<AbstractEntity>());
         }
         addPlayer();
     }
 
-    public ArrayList<AbstractEntity> getPlayers(){
-        return myEntities.get(EntityType.Player);
+    public ArrayList<AbstractEntity> getEntitiesOfType(EntityType ET){
+        return myEntities.get(ET);
     }
 
-    public ArrayList<AbstractEntity> getMathEnemies(){
-        return myEntities.get(EntityType.MathEnemy);
+    public void addBullet(BulletEntity myBullet){
+        ArrayList<AbstractEntity> myBullets = myEntities.get(EntityType.Bullet);
+        myBullets.add(myBullet);
     }
 
-    public ArrayList<AbstractEntity> getPuzzleEnemies(){
-        return myEntities.get(EntityType.PuzzleEnemy);
-    }
-
-    public ArrayList<AbstractEntity> getShapesEnemies(){
-        return myEntities.get(EntityType.ShapesEnemy);
-    }
-
-    public ArrayList<AbstractEntity> getAllEnemies(){
-        ArrayList<AbstractEntity> allEnemies = new ArrayList<AbstractEntity>();
-        allEnemies.addAll(this.getMathEnemies());
-        allEnemies.addAll(this.getPuzzleEnemies());
-        allEnemies.addAll(this.getShapesEnemies());
-        return allEnemies;
-    }
 
     private void addPlayer(){
-        ArrayList<AbstractEntity> myPlayers = new ArrayList<AbstractEntity>();
+        ArrayList<AbstractEntity> myPlayers = myEntities.get(EntityType.Player);
         myPlayers.add(new PlayerEntity());
         myEntities.put(EntityType.Player, myPlayers);
     }

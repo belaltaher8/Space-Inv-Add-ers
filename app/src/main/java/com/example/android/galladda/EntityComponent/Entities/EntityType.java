@@ -5,5 +5,5 @@ package com.example.android.galladda.EntityComponent.Entities;
  */
 
 public enum EntityType {
-    Player, MathEnemy, ShapesEnemy, PuzzleEnemy;
+    Player, MathEnemy, ShapesEnemy, PuzzleEnemy, Bullet
 }
