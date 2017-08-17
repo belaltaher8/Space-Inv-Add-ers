@@ -52,9 +52,9 @@ public class GameView extends LinearLayout {
 
     private EntityManager myEM;
 
-    private Bitmap bitmapShip = BitmapFactory.decodeResource(this.getResources(), R.drawable.ship);
-    private final Bitmap bitmapBullet = BitmapFactory.decodeResource(this.getResources(), R.drawable.bullet);
-    private final Bitmap bitmapEnemy = BitmapFactory.decodeResource(this.getResources(), R.drawable.mathenemy);
+  //  private Bitmap bitmapShip = BitmapFactory.decodeResource(this.getResources(), R.drawable.ship);
+   // private final Bitmap bitmapBullet = BitmapFactory.decodeResource(this.getResources(), R.drawable.bullet);
+    //private final Bitmap bitmapEnemy = BitmapFactory.decodeResource(this.getResources(), R.drawable.mathenemy);
 
     public GameView(Context context, EntityManager aEM){
         super(context);
@@ -62,7 +62,6 @@ public class GameView extends LinearLayout {
         setUpSurfaceView(context);
         setUpMovementPanel(context);
         myEM = aEM;
-        createPlayerBitmap();
     }
 
     private void setUpSurfaceView(Context context){
@@ -153,15 +152,15 @@ public class GameView extends LinearLayout {
     }
 
 
-    public void createPlayerBitmap(){
-        bitmapShip = bitmapShip.createScaledBitmap(bitmapShip,150,150,false);
-        PositionComponent playerPC = (PositionComponent) myEM.getPlayerOne().getComponent(ComponentType.Position);
+    public int[] getScreenDimensions(){
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
-        playerPC.setX(width/2-75);
-        playerPC.setY(height/1.5f);
+        int[] returningArray = new int[2];
+        returningArray[0] = width;
+        returningArray[1] = height;
+        return returningArray;
     }
 
 
@@ -178,17 +177,17 @@ public class GameView extends LinearLayout {
                     if(ET.equals(EntityType.Player)){
                         PlayerEntity player = (PlayerEntity) entities.get(currentEntityToDrawIndex);
                         PositionComponent playerPC = (PositionComponent) player.getComponent(ComponentType.Position);
-                        myCanvas.drawBitmap(bitmapShip, playerPC.getX(), playerPC.getY(), myPaint);
+                        myCanvas.drawBitmap(myEM.getBitmap(ET), playerPC.getX(), playerPC.getY(), myPaint);
                     }
                     if(ET.equals(EntityType.Bullet)){
                         BulletEntity currentBullet = (BulletEntity) entities.get(currentEntityToDrawIndex);
                         PositionComponent bulletPC = (PositionComponent) currentBullet.getComponent(ComponentType.Position);
-                        myCanvas.drawBitmap(bitmapBullet, bulletPC.getX(), bulletPC.getY() ,myPaint);
+                        myCanvas.drawBitmap(myEM.getBitmap(ET), bulletPC.getX(), bulletPC.getY() ,myPaint);
                     }
                     if(ET.equals(EntityType.MathEnemy)){
                         EnemyEntity currentEnemy = (EnemyEntity) entities.get(currentEntityToDrawIndex);
                         PositionComponent enemyPC = (PositionComponent) currentEnemy.getComponent(ComponentType.Position);
-                        myCanvas.drawBitmap(bitmapEnemy, enemyPC.getX(), enemyPC.getY(), myPaint);
+                        myCanvas.drawBitmap(myEM.getBitmap(ET), enemyPC.getX(), enemyPC.getY(), myPaint);
                     }
                 }
             }

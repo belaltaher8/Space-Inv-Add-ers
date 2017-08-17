@@ -1,5 +1,6 @@
 package com.example.android.galladda.GameController;
 
+import android.content.Context;
 import android.util.DisplayMetrics;
 
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
@@ -13,6 +14,8 @@ import com.example.android.galladda.EntityComponent.Entities.PlayerEntity;
 
 import java.util.ArrayList;
 
+import static android.R.attr.width;
+
 /**
  * Created by Belal Taher on 8/15/2017.
  */
@@ -21,22 +24,28 @@ public class LevelHandler {
 
     EntityManager currentLevelEM;
 
-    public LevelHandler(){
-        currentLevelEM = new EntityManager();
-        resetPlayer();
-        initializeLevelOne();
+    private int screenWidth;
+    private int screenHeight;
+
+    public LevelHandler(Context myContext){
+        currentLevelEM = new EntityManager(myContext);
+        createPlayer();
+        initializeEnemiesForLevel(1);
         //TODO: Add XML compatibility
     }
 
-    private void initializeLevelOne(){
-        PlayerEntity myPlayer = currentLevelEM.getPlayerOne();
-        PositionComponent playerPos = (PositionComponent) myPlayer.getComponent(ComponentType.Position);
-        playerPos.setX(0);
-        playerPos.setY(0);
-        initializeEnemiesForLevel(1);
+    public void resetPlayerOne(){
+        PositionComponent playerPC = (PositionComponent)currentLevelEM.getPlayerOne().getComponent(ComponentType.Position);
+        playerPC.setX(screenWidth/2-75);
+        playerPC.setY(screenHeight/1.5f);
     }
 
-    private void resetPlayer(){
+    public void takeInScreenDimensions(int[] screenDimensions){
+        screenWidth = screenDimensions[0];
+        screenHeight = screenDimensions[1];
+    }
+
+    private void createPlayer(){
         ArrayList<AbstractEntity> myPlayers =currentLevelEM.getEntitiesOfType(EntityType.Player);
         myPlayers.add(new PlayerEntity());
     }

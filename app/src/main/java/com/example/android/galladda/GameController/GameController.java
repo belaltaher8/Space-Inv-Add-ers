@@ -26,8 +26,10 @@ public class GameController implements Runnable{
 
     public GameController(Context context){
         playing = true;
-        myLevelHandler = new LevelHandler();
+        myLevelHandler = new LevelHandler(context);
         myGameView = new GameView(context, myLevelHandler.getCurrentLevelEM());
+        myLevelHandler.takeInScreenDimensions(myGameView.getScreenDimensions());
+        myLevelHandler.resetPlayerOne();
         myGameModel = new GameModel(myLevelHandler.getCurrentLevelEM());
     }
 

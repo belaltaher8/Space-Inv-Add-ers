@@ -1,6 +1,7 @@
 package com.example.android.galladda.EntityComponent.Entities;
 
 import android.graphics.Bitmap;
+import android.support.constraint.solver.widgets.Rectangle;
 
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.IComponent;
@@ -15,6 +16,8 @@ import java.util.HashSet;
 public abstract class AbstractEntity {
 
     protected HashMap<ComponentType, IComponent> myComponents;
+
+    protected Rectangle myCollisionDetector;
 
     public AbstractEntity(){
         myComponents = new HashMap<ComponentType, IComponent>();
