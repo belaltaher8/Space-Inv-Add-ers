@@ -17,7 +17,6 @@ public class EntityManager {
         for(EntityType ET : EntityType.values()){
             myEntities.put(ET, new ArrayList<AbstractEntity>());
         }
-        addPlayer();
     }
 
     public ArrayList<AbstractEntity> getEntitiesOfType(EntityType ET){
@@ -29,12 +28,6 @@ public class EntityManager {
         myBullets.add(myBullet);
     }
 
-
-    private void addPlayer(){
-        ArrayList<AbstractEntity> myPlayers = myEntities.get(EntityType.Player);
-        myPlayers.add(new PlayerEntity());
-        myEntities.put(EntityType.Player, myPlayers);
-    }
 
     public PlayerEntity getPlayerOne(){
         return (PlayerEntity) myEntities.get(EntityType.Player).get(0);

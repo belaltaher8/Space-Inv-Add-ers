@@ -24,6 +24,7 @@ import com.example.android.galladda.EntityComponent.Components.PositionComponent
 import com.example.android.galladda.EntityComponent.Components.VelocityComponent;
 import com.example.android.galladda.EntityComponent.Entities.AbstractEntity;
 import com.example.android.galladda.EntityComponent.Entities.BulletEntity;
+import com.example.android.galladda.EntityComponent.Entities.EnemyEntity;
 import com.example.android.galladda.EntityComponent.Entities.EntityManager;
 import com.example.android.galladda.EntityComponent.Entities.EntityType;
 import com.example.android.galladda.EntityComponent.Entities.PlayerEntity;
@@ -31,6 +32,7 @@ import com.example.android.galladda.R;
 
 import java.util.ArrayList;
 
+import static android.R.attr.bitmap;
 import static android.content.ContentValues.TAG;
 import static com.example.android.galladda.EntityComponent.Entities.EntityType.Bullet;
 import static com.example.android.galladda.EntityComponent.Entities.EntityType.Player;
@@ -52,6 +54,7 @@ public class GameView extends LinearLayout {
 
     private Bitmap bitmapShip = BitmapFactory.decodeResource(this.getResources(), R.drawable.ship);
     private final Bitmap bitmapBullet = BitmapFactory.decodeResource(this.getResources(), R.drawable.bullet);
+    private final Bitmap bitmapEnemy = BitmapFactory.decodeResource(this.getResources(), R.drawable.mathenemy);
 
     public GameView(Context context, EntityManager aEM){
         super(context);
@@ -177,10 +180,15 @@ public class GameView extends LinearLayout {
                         PositionComponent playerPC = (PositionComponent) player.getComponent(ComponentType.Position);
                         myCanvas.drawBitmap(bitmapShip, playerPC.getX(), playerPC.getY(), myPaint);
                     }
-                    if(ET.equals(Bullet)){
+                    if(ET.equals(EntityType.Bullet)){
                         BulletEntity currentBullet = (BulletEntity) entities.get(currentEntityToDrawIndex);
                         PositionComponent bulletPC = (PositionComponent) currentBullet.getComponent(ComponentType.Position);
                         myCanvas.drawBitmap(bitmapBullet, bulletPC.getX(), bulletPC.getY() ,myPaint);
+                    }
+                    if(ET.equals(EntityType.MathEnemy)){
+                        EnemyEntity currentEnemy = (EnemyEntity) entities.get(currentEntityToDrawIndex);
+                        PositionComponent enemyPC = (PositionComponent) currentEnemy.getComponent(ComponentType.Position);
+                        myCanvas.drawBitmap(bitmapEnemy, enemyPC.getX(), enemyPC.getY(), myPaint);
                     }
                 }
             }
