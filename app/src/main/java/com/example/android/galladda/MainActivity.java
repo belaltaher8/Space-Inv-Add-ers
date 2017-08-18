@@ -2,6 +2,8 @@ package com.example.android.galladda;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.SurfaceView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.android.galladda.GameController.GameController;
@@ -16,6 +18,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         gameController = new GameController(this);
         setContentView(gameController.getGameView());
+        SurfaceView myGameScreen = gameController.getGameView().getMyGameScreen();
+
+        myGameScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(gameController.checkPlaying() == true){
+                    gameController.pause();
+                }
+                else{
+                    gameController.resume();
+                }
+            }
+        });
     }
 
     public void onResume(){

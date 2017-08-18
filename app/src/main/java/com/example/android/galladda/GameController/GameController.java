@@ -15,6 +15,7 @@ public class GameController implements Runnable{
     GameView myGameView;
     GameModel myGameModel;
     LevelHandler myLevelHandler;
+    ChallengeHandler myChallengeHandler;
 
     private volatile boolean playing;
 
@@ -31,6 +32,7 @@ public class GameController implements Runnable{
         myLevelHandler.takeInScreenDimensions(myGameView.getScreenDimensions());
         myLevelHandler.resetPlayerOne();
         myGameModel = new GameModel(myLevelHandler.getCurrentLevelEM());
+        myChallengeHandler = new ChallengeHandler(myLevelHandler.getCurrentLevelEM(), myGameModel.getMyChallengeEngine());
     }
 
     public GameView getGameView(){
@@ -50,6 +52,9 @@ public class GameController implements Runnable{
             if(timeThisFrame > 0){
                 fps = 1000/timeThisFrame;
             }
+            if(myChallengeHandler.checkIfChallengeOccured() != null){
+                pause();
+            }
         }
     }
 
@@ -66,6 +71,10 @@ public class GameController implements Runnable{
         playing = true;
         gameThread = new Thread(this);
         gameThread.start();
+    }
+
+    public boolean checkPlaying(){
+        return playing;
     }
 
 }

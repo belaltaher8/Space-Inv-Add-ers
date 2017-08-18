@@ -3,6 +3,7 @@ package com.example.android.galladda.Model;
 import com.example.android.galladda.EntityComponent.Entities.EntityManager;
 import com.example.android.galladda.Model.Engines.AbstractEngine;
 import com.example.android.galladda.Model.Engines.AbstractEngine;
+import com.example.android.galladda.Model.Engines.ChallengeEngine;
 import com.example.android.galladda.Model.Engines.CollisionEngine;
 import com.example.android.galladda.Model.Engines.MovementEngine;
 
@@ -32,5 +33,10 @@ public class GameModel {
     private void attachEngines(EntityManager myEM){
         myEngines.add(new MovementEngine(myEM));
         myEngines.add(new CollisionEngine(myEM));
+        myEngines.add(new ChallengeEngine(myEM));
+    }
+
+    public ChallengeEngine getMyChallengeEngine(){
+        return (ChallengeEngine) myEngines.get(2);
     }
 }

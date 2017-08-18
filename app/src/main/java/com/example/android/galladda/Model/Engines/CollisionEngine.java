@@ -28,7 +28,7 @@ public class CollisionEngine extends AbstractEngine {
     public void update() {
         boolean killed = false;
         ArrayList<AbstractEntity> myBullets =  myEM.getEntitiesOfType(EntityType.Bullet);
-        ArrayList<AbstractEntity> myEnemies = myEM.getEntitiesOfType(EntityType.MathEnemy);
+        ArrayList<AbstractEntity> myMathEnemies = myEM.getEntitiesOfType(EntityType.MathEnemy);
         int currentBulletIndex = 0;
         while(currentBulletIndex < myBullets.size()){
             BulletEntity currentBullet = (BulletEntity) myBullets.get(currentBulletIndex);
@@ -36,14 +36,16 @@ public class CollisionEngine extends AbstractEngine {
             Bitmap bulletBitmap = myEM.getBitmap(EntityType.Bullet);
             Rect myBulletCollisionSensor = new Rect((int) bulletPos.getX(), (int) bulletPos.getY(), (int) bulletPos.getX()+bulletBitmap.getWidth(), (int) bulletPos.getY() + bulletBitmap.getHeight());
             int currentEnemyIndex = 0;
-            while(currentEnemyIndex < myEnemies.size()){
-                EnemyEntity currentEnemy = (EnemyEntity) myEnemies.get(currentEnemyIndex);
+
+            while(currentEnemyIndex < myMathEnemies.size()){
+                EnemyEntity currentEnemy = (EnemyEntity) myMathEnemies.get(currentEnemyIndex);
                 PositionComponent enemyPos = (PositionComponent) currentEnemy.getComponent(ComponentType.Position);
                 Bitmap enemyBitmap = myEM.getBitmap(EntityType.MathEnemy);
                 Rect myEnemyCollisionSensor = new Rect((int) enemyPos.getX(), (int) enemyPos.getY(), (int) enemyPos.getX() + enemyBitmap.getWidth(), (int) enemyPos.getY() + enemyBitmap.getHeight());
                 if(myEnemyCollisionSensor.intersect(myBulletCollisionSensor)){
                     myBullets.remove(currentBullet);
-                    myEnemies.remove(currentEnemy);
+                    myMathEnemies.remove(currentEnemy);
+                    addEnemyDeath(EntityType.MathEnemy);
                     killed = true;
                     break;
                 }
@@ -59,5 +61,9 @@ public class CollisionEngine extends AbstractEngine {
             }
 
         }
+    }
+
+    private void addEnemyDeath(EntityType ET){
+        myEM.addEnemyDeath(ET);
     }
 }

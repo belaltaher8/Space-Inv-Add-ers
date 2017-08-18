@@ -52,10 +52,6 @@ public class GameView extends LinearLayout {
 
     private EntityManager myEM;
 
-  //  private Bitmap bitmapShip = BitmapFactory.decodeResource(this.getResources(), R.drawable.ship);
-   // private final Bitmap bitmapBullet = BitmapFactory.decodeResource(this.getResources(), R.drawable.bullet);
-    //private final Bitmap bitmapEnemy = BitmapFactory.decodeResource(this.getResources(), R.drawable.mathenemy);
-
     public GameView(Context context, EntityManager aEM){
         super(context);
         setOrientation(LinearLayout.VERTICAL);
@@ -138,6 +134,7 @@ public class GameView extends LinearLayout {
         shootButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO: FIX THIS SO THAT IT DOESNT SHOOT WHEN PAUSED
                 BulletEntity newBullet = myEM.getPlayerOne().shoot();
                 myEM.addBullet(newBullet);
             }
@@ -193,6 +190,10 @@ public class GameView extends LinearLayout {
             }
             ourHolder.unlockCanvasAndPost(myCanvas);
         }
+    }
+
+    public SurfaceView getMyGameScreen(){
+        return myGameScreen;
     }
 
 
