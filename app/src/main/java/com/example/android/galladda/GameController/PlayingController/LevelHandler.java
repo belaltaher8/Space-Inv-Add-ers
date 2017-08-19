@@ -1,4 +1,4 @@
-package com.example.android.galladda.GameController;
+package com.example.android.galladda.GameController.PlayingController;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

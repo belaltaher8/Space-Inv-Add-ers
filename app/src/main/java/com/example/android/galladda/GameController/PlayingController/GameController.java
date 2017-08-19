@@ -1,4 +1,4 @@
-package com.example.android.galladda.GameController;
+package com.example.android.galladda.GameController.PlayingController;
 
 import android.content.Context;
 import android.content.Intent;
@@ -75,7 +75,7 @@ public class GameController implements Runnable{
         myChallengeHandler.getMyChallengeEngine().reset();
         pause();
         Intent intent = new Intent();
-        intent.setClass(myContext, QuestionActivity.class);
+        intent.setClass(myContext, QuestionActivity.class); //TODO: add info to this so it knows what kind of challenge
         myContext.startActivity(intent);
     }
 
