@@ -1,4 +1,4 @@
-package com.example.android.galladda.View;
+package com.example.android.galladda.View.PlayingView;
 
 import android.app.ActionBar;
 import android.app.Activity;

@@ -25,8 +25,6 @@ public class ChallengeEngine extends AbstractEngine {
 
     @Override
     public void update() {
-        myChallenge = null;
-        startChallenge = false;
         HashMap<EntityType, Integer> enemyDeaths = myEM.getEnemyDeaths();
         if(enemyDeaths.get(EntityType.MathEnemy) >= 3){
             startChallenge = true;

@@ -4,10 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.TextView;
 
 import com.example.android.galladda.GameController.GameController;
-import com.example.android.galladda.View.GameView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         gameController.pause();
     }
 
+
+
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
@@ -53,4 +53,5 @@ public class MainActivity extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+
 }
