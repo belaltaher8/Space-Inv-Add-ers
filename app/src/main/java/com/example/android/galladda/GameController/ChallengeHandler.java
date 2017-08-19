@@ -29,4 +29,8 @@ public class ChallengeHandler {
             return myChallenge;
         }
     }
+
+    public ChallengeEngine getMyChallengeEngine(){
+        return myChallengeEngine;
+    }
 }

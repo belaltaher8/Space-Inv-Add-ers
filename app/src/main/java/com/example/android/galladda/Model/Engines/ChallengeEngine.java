@@ -50,4 +50,9 @@ public class ChallengeEngine extends AbstractEngine {
     public ChallengeType checkMyChallenge(){
         return myChallenge;
     }
+
+    public void reset(){
+        startChallenge = false;
+        myChallenge = null;
+    }
 }

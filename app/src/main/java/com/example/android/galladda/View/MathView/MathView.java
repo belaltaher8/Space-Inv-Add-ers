@@ -45,4 +45,8 @@ public class MathView extends LinearLayout {
     private void setUpAnswerButtons(Context context){
 
     }
+
+    public boolean checkIfQuestionAnswered(){
+        return false;
+    }
 }
