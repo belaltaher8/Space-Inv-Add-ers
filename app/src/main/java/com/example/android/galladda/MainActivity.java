@@ -2,10 +2,8 @@ package com.example.android.galladda;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.SurfaceView;
-import android.view.View;
 
-import com.example.android.galladda.GameController.GameController;
+import com.example.android.galladda.GameController.PlayingController.GameController;
 
 public class MainActivity extends AppCompatActivity {
 
