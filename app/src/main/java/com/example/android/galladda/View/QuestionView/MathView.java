@@ -1,4 +1,4 @@
-package com.example.android.galladda.View.MathView;
+package com.example.android.galladda.View.QuestionView;
 
 import android.content.Context;
 import android.widget.LinearLayout;
@@ -10,6 +10,8 @@ import java.util.Random;
  */
 
 public class MathView extends LinearLayout {
+
+
 
     private int answer;
 

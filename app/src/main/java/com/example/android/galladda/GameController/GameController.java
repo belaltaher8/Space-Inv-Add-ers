@@ -1,11 +1,13 @@
 package com.example.android.galladda.GameController;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.example.android.galladda.QuestionActivity;
 import com.example.android.galladda.Model.Engines.ChallengeType;
 import com.example.android.galladda.Model.GameModel;
-import com.example.android.galladda.View.MathView.MathView;
+import com.example.android.galladda.View.QuestionView.MathView;
 import com.example.android.galladda.View.PlayingView.GameView;
 
 /**
@@ -15,8 +17,6 @@ import com.example.android.galladda.View.PlayingView.GameView;
 public class GameController implements Runnable{
 
     private volatile boolean playing;
-    private boolean gameViewOn;
-    private boolean questionViewOn;
 
     private GameView myGameView;
     private GameModel myGameModel;
@@ -33,7 +33,7 @@ public class GameController implements Runnable{
     Context myContext;
 
     public GameController(Context context){
-        setUpBooleanFlags();
+        playing = true;
         myContext = context;
         myLevelHandler = new LevelHandler(myContext);
         myGameView = new GameView(myContext, myLevelHandler.getCurrentLevelEM());
@@ -41,12 +41,6 @@ public class GameController implements Runnable{
         myLevelHandler.resetPlayerOne();
         myGameModel = new GameModel(myLevelHandler.getCurrentLevelEM());
         myChallengeHandler = new ChallengeHandler(myLevelHandler.getCurrentLevelEM(), myGameModel.getMyChallengeEngine());
-    }
-
-    private void setUpBooleanFlags(){
-        playing = true;
-        gameViewOn = true;
-        questionViewOn = false;
     }
 
     public GameView getGameView(){
@@ -59,18 +53,9 @@ public class GameController implements Runnable{
 
     public void run(){
         while (playing){
-            if(gameViewOn == true){ //PLAY GAME REGULARLY
-                playGame();
-            }
-            if(myChallengeHandler.checkIfChallengeOccured()!=null){ //CHALLENGE HAS TRIGGERED, CHANGE BOOLEAN FLAGS AND RESET ENGINE
+            playGame();
+            if(myChallengeHandler.checkIfChallengeOccured()!=null){
                 executeChallengeOfType(myChallengeHandler.checkIfChallengeOccured());
-                gameViewOn = false;
-                questionViewOn = true;
-                myChallengeHandler.getMyChallengeEngine().reset();
-            }
-
-            if(questionViewOn == true){ //EXECUTE CHALLENGE SCREEN
-                playQuestionScreen();
             }
         }
     }
@@ -85,23 +70,13 @@ public class GameController implements Runnable{
         }
     }
 
-    private void playQuestionScreen(){
-        if(myMathView.checkIfQuestionAnswered() == true){
-            questionViewOn = false;
-            gameViewOn = true;
-        }
-    }
 
     private void executeChallengeOfType(ChallengeType CT){
-        if(CT.equals(ChallengeType.Math)){
-            myMathView = new MathView(myContext);
-        }
-        if(CT.equals(ChallengeType.Puzzle)){
-            //TODO: add Puzzle view
-        }
-        if(CT.equals(ChallengeType.Shape)){
-            //TODO: add Shape view
-        }
+        myChallengeHandler.getMyChallengeEngine().reset();
+        pause();
+        Intent intent = new Intent();
+        intent.setClass(myContext, QuestionActivity.class);
+        myContext.startActivity(intent);
     }
 
     public void pause(){
