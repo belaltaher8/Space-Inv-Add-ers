@@ -55,7 +55,6 @@ public class GameController implements Runnable{
     public void run(){
         while (playing){
             playGame();
-
             if(myChallengeHandler.checkIfChallengeOccured()!=null){
                 executeChallengeOfType(myChallengeHandler.checkIfChallengeOccured());
                 myChallengeHandler.getMyChallengeEngine().reset();
