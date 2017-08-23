@@ -10,6 +10,8 @@ import com.example.android.galladda.Model.GameModel;
 import com.example.android.galladda.View.QuestionView.MathView;
 import com.example.android.galladda.View.PlayingView.GameView;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
+
 /**
  * Created by Belal Taher on 8/15/2017.
  */
@@ -20,7 +22,6 @@ public class GameController implements Runnable{
 
     private GameView myGameView;
     private GameModel myGameModel;
-    private MathView myMathView;
     private LevelHandler myLevelHandler;
     private ChallengeHandler myChallengeHandler;
 
@@ -54,8 +55,10 @@ public class GameController implements Runnable{
     public void run(){
         while (playing){
             playGame();
+
             if(myChallengeHandler.checkIfChallengeOccured()!=null){
                 executeChallengeOfType(myChallengeHandler.checkIfChallengeOccured());
+                myChallengeHandler.getMyChallengeEngine().reset();
             }
         }
     }
@@ -72,10 +75,8 @@ public class GameController implements Runnable{
 
 
     private void executeChallengeOfType(ChallengeType CT){
-        myChallengeHandler.getMyChallengeEngine().reset();
-        pause();
         Intent intent = new Intent();
-        intent.setClass(myContext, QuestionActivity.class); //TODO: add info to this so it knows what kind of challenge
+        intent.setClass(myContext, QuestionActivity.class);
         myContext.startActivity(intent);
     }
 
@@ -92,10 +93,6 @@ public class GameController implements Runnable{
         playing = true;
         gameThread = new Thread(this);
         gameThread.start();
-    }
-
-    public boolean checkPlaying(){
-        return playing;
     }
 
 }
