@@ -14,7 +14,6 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_math);
         myQuestionController = new QuestionController(this, ChallengeType.Math);
         setContentView((View) myQuestionController.getMyQuestionView());
     }

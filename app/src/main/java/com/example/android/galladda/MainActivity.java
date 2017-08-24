@@ -1,29 +1,43 @@
 package com.example.android.galladda;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.example.android.galladda.GameController.PlayingController.GameController;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private GameController gameController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gameController = new GameController(this);
-        setContentView(gameController.getGameView());
+        setContentView(R.layout.activity_title);
+        Button instructionButton =  (Button) findViewById(R.id.instruction_button);
+        instructionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), InstructionActivity.class);
+                startActivity(i);
+            }
+        });
+        Button startButton =  (Button) findViewById(R.id.start_button);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     public void onResume(){
         super.onResume();
-        gameController.resume();
     }
 
     public void onPause(){
         super.onPause();
-        gameController.pause();
     }
 
 

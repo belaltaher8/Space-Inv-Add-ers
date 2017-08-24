@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background = "@drawable/space">
+
+    <LinearLayout
+        android:orientation = "vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text = "Welcome to Alien Invadders!"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:textColor="@android:color/white"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft = "30dp"
+            android:layout_marginRight = "30dp"
+            android:textAlignment="center"
+            android:textSize = "17dp"
+            android:text="Welcome, cadet! You've just been recruited by the most powerful anti-alien force in the galaxy! Your mission is to fend off wave after wave of alien as they attempt to destroy the Earth. But be careful, these aren't your regular aliens. After every few aliens you take out, they'll test your knowledge to see if the human race is worth sparing. If you get their question wrong, they'll get angry! Your only chance at saving the Earth is to shoot as many aliens as possible and get all their questions right! Now get out there, cadet! Show those aliens what we humans can do!"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text = "Back"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight = "60dp"
+        android:layout_marginBottom = "10dp"
+        android:textColor = "@android:color/white"
+        android:background="@android:color/holo_green_light"
+        android:id="@+id/back_button"/>
+
+
+</RelativeLayout>

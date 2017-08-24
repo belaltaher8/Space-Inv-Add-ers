@@ -58,6 +58,7 @@ public class GameController implements Runnable{
             if(myChallengeHandler.checkIfChallengeOccured()!=null){
                 executeChallengeOfType(myChallengeHandler.checkIfChallengeOccured());
                 myChallengeHandler.getMyChallengeEngine().reset();
+                playing = false;
             }
         }
     }
