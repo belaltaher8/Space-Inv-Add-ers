@@ -31,38 +31,27 @@ public class EntityManager {
         setUpEnemyDeaths();
     }
 
-    private void setUpEnemyDeaths(){
-        enemyDeaths = new HashMap<EntityType, Integer>();
-        for(EntityType enemyType : EntityType.values()){
-            if(enemyType.name().contains("Enemy")) {
-                enemyDeaths.put(enemyType, 0);
-            }
-        }
-    }
-
     public void addEnemyDeath(EntityType ET){
         Integer currentNumOfDeaths = enemyDeaths.get(ET);
         Integer newNumOfDeaths = currentNumOfDeaths + 1;
         enemyDeaths.put(ET, newNumOfDeaths);
     }
 
-    private void setUpMyEntities(){
-        myEntities = new HashMap<EntityType, ArrayList<AbstractEntity>>();
-        for(EntityType ET : EntityType.values()){
-            myEntities.put(ET, new ArrayList<AbstractEntity>());
+    public ArrayList<AbstractEntity> getAllEntities(){
+        ArrayList<AbstractEntity> allEntities = new ArrayList<AbstractEntity>();
+        for(EntityType e : EntityType.values()){
+            allEntities.addAll(getEntitiesOfType(e));
         }
+        return allEntities;
     }
 
-    private void setUpBitmapHashMap(){
-        //TODO: Refactor and create an algorithm for automatically doing this
-        entityBitmaps = new HashMap<EntityType, Bitmap>();
-        Bitmap bitmapShip = BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.ship);
-        bitmapShip = bitmapShip.createScaledBitmap(bitmapShip,150,150,false);
-        entityBitmaps.put(EntityType.Player, bitmapShip);
-        entityBitmaps.put(EntityType.Bullet, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.bullet));
-        entityBitmaps.put(EntityType.MathEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.mathenemy));
-        entityBitmaps.put(EntityType.PuzzleEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.shapeenemy));
-        entityBitmaps.put(EntityType.ShapeEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.puzzleenemy));
+    public ArrayList<AbstractEntity> getAllEnemies(){
+        ArrayList<AbstractEntity> allEntities = new ArrayList<AbstractEntity>();
+        for(EntityType e : EntityType.values()){
+            if(e.name().contains("Enemy"))
+                allEntities.addAll(getEntitiesOfType(e));
+        }
+        return allEntities;
     }
 
     public Bitmap getBitmap(EntityType ET){
@@ -87,5 +76,33 @@ public class EntityManager {
         return (PlayerEntity) myEntities.get(EntityType.Player).get(0);
     }
 
+    private void setUpEnemyDeaths(){
+        enemyDeaths = new HashMap<EntityType, Integer>();
+        for(EntityType enemyType : EntityType.values()){
+            if(enemyType.name().contains("Enemy")) {
+                enemyDeaths.put(enemyType, 0);
+            }
+        }
+    }
+
+
+    private void setUpMyEntities(){
+        myEntities = new HashMap<EntityType, ArrayList<AbstractEntity>>();
+        for(EntityType ET : EntityType.values()){
+            myEntities.put(ET, new ArrayList<AbstractEntity>());
+        }
+    }
+
+    private void setUpBitmapHashMap(){
+        //TODO: Refactor and create an algorithm for automatically doing this
+        entityBitmaps = new HashMap<EntityType, Bitmap>();
+        Bitmap bitmapShip = BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.ship);
+        bitmapShip = bitmapShip.createScaledBitmap(bitmapShip,150,150,false);
+        entityBitmaps.put(EntityType.Player, bitmapShip);
+        entityBitmaps.put(EntityType.Bullet, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.bullet));
+        entityBitmaps.put(EntityType.MathEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.mathenemy));
+        entityBitmaps.put(EntityType.PuzzleEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.shapeenemy));
+        entityBitmaps.put(EntityType.ShapeEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.puzzleenemy));
+    }
 
 }

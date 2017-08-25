@@ -19,9 +19,11 @@ import java.util.ArrayList;
 
 public class MovementEngine extends AbstractEngine {
 
-    public final int LEFT_SIDE_OF_SCREEN = 0;
+    private int LEFT_SIDE_OF_SCREEN = 0;
+    private int RIGHT_SIDE_OF_SCREEN;
+    private int TOP_OF_SCREEN = 0;
+    private int BOTTOM_OF_SCREEN;
 
-    public final int TOP_OF_SCREEN = 0;
 
     public MovementEngine(EntityManager aEM){
         super(aEM);
@@ -32,9 +34,13 @@ public class MovementEngine extends AbstractEngine {
         checkBoundaries();
     }
 
-    private void updateAll(){
-        ArrayList<AbstractEntity> allEntities = getAllEntities();
+    public void attachBoundaries(int[] boundaries){
+        RIGHT_SIDE_OF_SCREEN = boundaries[0] - 150;
+        BOTTOM_OF_SCREEN = boundaries[1];
+    }
 
+    private void updateAll(){
+        ArrayList<AbstractEntity> allEntities = myEM.getAllEntities();
         for(AbstractEntity e : allEntities){
             PositionComponent myPC = (PositionComponent) e.getComponent(ComponentType.Position);
             VelocityComponent myVC = (VelocityComponent) e.getComponent(ComponentType.Velocity);
@@ -44,30 +50,25 @@ public class MovementEngine extends AbstractEngine {
     }
 
     private void checkBoundaries(){
-        ArrayList<AbstractEntity> allEntities = getAllEntities();
-
+        ArrayList<AbstractEntity> allEntities = myEM.getAllEntities();
         for(AbstractEntity e : allEntities){
             PositionComponent myPC = (PositionComponent) e.getComponent(ComponentType.Position);
             if(e.getMyEntityType().equals(EntityType.Player)){
                 if(myPC.getX() < LEFT_SIDE_OF_SCREEN){
                     myPC.setX(LEFT_SIDE_OF_SCREEN);
                 }
-                //TODO: ADD RIGHT BOUNDARY FIND A WAY TO PASS SCREEN SIZE TO MOVEMENT ENGINE
+                else if (myPC.getX() > RIGHT_SIDE_OF_SCREEN){
+                    myPC.setX(RIGHT_SIDE_OF_SCREEN);
+                }
             }
             else if (e.getMyEntityType().equals(EntityType.Bullet)){
                 if(myPC.getY() < TOP_OF_SCREEN){
                     myEM.getEntitiesOfType(EntityType.Bullet).remove(e);
                 }
             }
+            //TODO: ELSE IF FOR ENEMY BULLETS
         }
     }
 
-    private ArrayList<AbstractEntity> getAllEntities(){
-        ArrayList<AbstractEntity> allEntities = new ArrayList<AbstractEntity>();
-        for(EntityType e : EntityType.values()){
-            allEntities.addAll(myEM.getEntitiesOfType(e));
-        }
-        return allEntities;
-    }
 
 }

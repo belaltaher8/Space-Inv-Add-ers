@@ -12,6 +12,8 @@ import com.example.android.galladda.Model.Engines.MovementEngine;
 
 import java.util.ArrayList;
 
+import static android.media.CamcorderProfile.get;
+
 /**
  * Created by Belal Taher on 8/15/2017.
  */
@@ -41,6 +43,8 @@ public class GameModel {
     }
 
     public void takeInScreenDimensions(int[] screenDimensions){
+        MovementEngine myMovementEngine = (MovementEngine) myEngines.get(0);
+        myMovementEngine.attachBoundaries(screenDimensions);
         myLevelHandler.takeInScreenDimensions(screenDimensions);
     }
 

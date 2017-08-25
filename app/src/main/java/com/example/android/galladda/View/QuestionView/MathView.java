@@ -29,7 +29,6 @@ public class MathView extends QuestionView {
     }
 
     protected void setUpQuestion(){
-        rand = new Random();
         firstNum = rand.nextInt(21);
         secondNum = rand.nextInt(21);
         int operation = rand.nextInt(3);

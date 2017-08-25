@@ -1,6 +1,10 @@
 package com.example.android.galladda.Model.Engines;
 
+import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
+import com.example.android.galladda.EntityComponent.Entities.General.AbstractEntity;
 import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
+
+import java.util.ArrayList;
 
 /**
  * Created by Belal Taher on 8/15/2017.
