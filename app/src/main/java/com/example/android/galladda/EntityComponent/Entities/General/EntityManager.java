@@ -61,8 +61,8 @@ public class EntityManager {
         entityBitmaps.put(EntityType.Player, bitmapShip);
         entityBitmaps.put(EntityType.Bullet, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.bullet));
         entityBitmaps.put(EntityType.MathEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.mathenemy));
-        //entityBitmaps.put(EntityType.PuzzleEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.shapeenemy));
-        //entityBitmaps.put(EntityType.ShapeEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.puzzleenemy));
+        entityBitmaps.put(EntityType.PuzzleEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.shapeenemy));
+        entityBitmaps.put(EntityType.ShapeEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.puzzleenemy));
     }
 
     public Bitmap getBitmap(EntityType ET){
