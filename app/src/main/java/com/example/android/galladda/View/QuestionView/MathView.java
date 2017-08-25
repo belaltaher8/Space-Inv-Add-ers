@@ -1,10 +1,14 @@
 package com.example.android.galladda.View.QuestionView;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.android.galladda.R;
 
 import java.util.Random;
 
@@ -52,7 +56,7 @@ public class MathView extends LinearLayout implements QuestionView {
     }
 
     public void setUpQuestionScreen(Context context){
-        setOrientation(LinearLayout.VERTICAL);
+      //  this.setBackground(R.drawable.space);
         setOrientation(LinearLayout.VERTICAL);
         TextView questionText = new TextView(context);
         questionText.setText("What is the answer the following question?");
@@ -62,11 +66,13 @@ public class MathView extends LinearLayout implements QuestionView {
                 2.0f
         );
         questionText.setLayoutParams((param));
+        questionText.setGravity(Gravity.CENTER);
         this.addView(questionText);
         String equation = firstNum + operatorSymbol + secondNum;
         TextView equationText = new TextView(context);
         equationText.setText(equation);
         equationText.setLayoutParams(param);
+        equationText.setGravity(Gravity.CENTER);
         this.addView(equationText);
     }
 
@@ -81,6 +87,7 @@ public class MathView extends LinearLayout implements QuestionView {
         myButtons[1] = choiceTwo;
         myButtons[2] = choiceThree;
         myButtons[3] = choiceFour;
+        //setButtonColorAndText(myButtons);
         assignValuesToAnswerButtons(myButtons, correctChoice);
         assignOnClickTowAnswerButtons(myButtons, correctChoice);
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(

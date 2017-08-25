@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation= "vertical"
     android:background = "@drawable/space">
 
     <LinearLayout
         android:orientation = "vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight = "6">
 
         <TextView
             android:layout_width="match_parent"
@@ -16,6 +18,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:layout_weight = "1"
             android:text = "Welcome to Space Invadders!"
             android:textAlignment="center"
             android:textSize="25dp"
@@ -27,24 +30,47 @@
             android:layout_marginLeft = "30dp"
             android:layout_marginRight = "30dp"
             android:textAlignment="center"
+            android:layout_weight = "7"
             android:textSize = "17dp"
             android:text="Welcome, cadet! You've just been recruited by the most powerful anti-alien force in the galaxy! Your mission is to fend off wave after wave of aliens as they attempt to destroy the Earth. But be careful, these aren't any regular aliens. After every few aliens you take out, they'll test your knowledge to see if the human race is worth sparing. Every question you get wrong will make them get angrier! Your only chance at saving the Earth is to shoot all the aliens and get all their questions right! Now get out there, cadet! Show those aliens what we humans can do!"
             android:textColor="@android:color/white"/>
 
     </LinearLayout>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text = "Back"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight = "60dp"
-        android:layout_marginBottom = "10dp"
-        android:textColor = "@android:color/white"
-        android:background="@android:color/holo_green_light"
-        android:id="@+id/back_button"/>
+        android:orientation = "horizontal"
+
+        android:layout_weight = "1">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight = "1"
+            android:layout_height="wrap_content"
+            android:text = "Controls"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight = "40dp"
+            android:layout_marginBottom = "10dp"
+            android:textColor = "@android:color/white"
+            android:background="@android:color/holo_green_light"
+            android:id="@+id/next_button"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight = "1"
+            android:layout_height="wrap_content"
+            android:text = "Back"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight = "40dp"
+            android:layout_marginBottom = "10dp"
+            android:textColor = "@android:color/white"
+            android:background="@android:color/holo_green_light"
+            android:id="@+id/back_button"/>
 
 
-</RelativeLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

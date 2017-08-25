@@ -167,23 +167,6 @@ public class GameView extends LinearLayout {
                     PositionComponent myPC = (PositionComponent) currentEntityToDraw.getComponent(ComponentType.Position);
                     myCanvas.drawBitmap(myEM.getBitmap(ET), myPC.getX(), myPC.getY(), myPaint);
                 }
-                /*for(int currentEntityToDrawIndex = 0; currentEntityToDrawIndex < entities.size(); currentEntityToDrawIndex++){
-                    if(ET.equals(EntityType.Player)){
-                        PlayerEntity player = (PlayerEntity) entities.get(currentEntityToDrawIndex);
-                        PositionComponent playerPC = (PositionComponent) player.getComponent(ComponentType.Position);
-                        myCanvas.drawBitmap(myEM.getBitmap(ET), playerPC.getX(), playerPC.getY(), myPaint);
-                    }
-                    if(ET.equals(EntityType.Bullet)){
-                        BulletEntity currentBullet = (BulletEntity) entities.get(currentEntityToDrawIndex);
-                        PositionComponent bulletPC = (PositionComponent) currentBullet.getComponent(ComponentType.Position);
-                        myCanvas.drawBitmap(myEM.getBitmap(ET), bulletPC.getX(), bulletPC.getY() ,myPaint);
-                    }
-                    if(ET.equals(EntityType.MathEnemy)){
-                        MathEnemyEntity currentEnemy = (MathEnemyEntity) entities.get(currentEntityToDrawIndex);
-                        PositionComponent enemyPC = (PositionComponent) currentEnemy.getComponent(ComponentType.Position);
-                        myCanvas.drawBitmap(myEM.getBitmap(ET), enemyPC.getX(), enemyPC.getY(), myPaint);
-                    }
-                }*/
             }
             ourHolder.unlockCanvasAndPost(myCanvas);
         }
