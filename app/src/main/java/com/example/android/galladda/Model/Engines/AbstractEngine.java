@@ -1,12 +1,6 @@
 package com.example.android.galladda.Model.Engines;
 
-import android.content.Entity;
-
-import com.example.android.galladda.EntityComponent.Entities.EntityManager;
-
-import java.util.Observer;
-
-import static android.os.Build.VERSION_CODES.O;
+import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
 
 /**
  * Created by Belal Taher on 8/15/2017.

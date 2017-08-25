@@ -1,41 +1,27 @@
-package com.example.android.galladda.View.PlayingView;
+package com.example.android.galladda.View.GameView;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.location.Location;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
 import com.example.android.galladda.EntityComponent.Components.VelocityComponent;
-import com.example.android.galladda.EntityComponent.Entities.AbstractEntity;
-import com.example.android.galladda.EntityComponent.Entities.BulletEntity;
-import com.example.android.galladda.EntityComponent.Entities.EnemyEntity;
-import com.example.android.galladda.EntityComponent.Entities.EntityManager;
-import com.example.android.galladda.EntityComponent.Entities.EntityType;
-import com.example.android.galladda.EntityComponent.Entities.PlayerEntity;
-import com.example.android.galladda.R;
+import com.example.android.galladda.EntityComponent.Entities.General.AbstractEntity;
+import com.example.android.galladda.EntityComponent.Entities.Bullets.BulletEntity;
+import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
+import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 
 import java.util.ArrayList;
-
-import static android.R.attr.bitmap;
-import static android.content.ContentValues.TAG;
-import static com.example.android.galladda.EntityComponent.Entities.EntityType.Bullet;
-import static com.example.android.galladda.EntityComponent.Entities.EntityType.Player;
 
 
 /**
@@ -49,15 +35,23 @@ public class GameView extends LinearLayout {
 
     private Canvas myCanvas;
     private Paint myPaint;
-
+    Context myContext;
     private EntityManager myEM;
 
-    public GameView(Context context, EntityManager aEM){
+    public GameView(Context context){
         super(context);
-        setOrientation(LinearLayout.VERTICAL);
-        setUpSurfaceView(context);
-        setUpMovementPanel(context);
+        myContext = context;
+    }
+
+    public void attachEM(EntityManager aEM){
         myEM = aEM;
+        initializeViews();
+    }
+
+    private void initializeViews(){
+        setOrientation(LinearLayout.VERTICAL);
+        setUpSurfaceView(myContext);
+        setUpMovementPanel(myContext);
     }
 
     private void setUpSurfaceView(Context context){
@@ -167,10 +161,13 @@ public class GameView extends LinearLayout {
             myCanvas.drawColor(Color.argb(255, 26, 128, 182));
             myPaint.setColor(Color.argb(255, 249, 129, 0));
             for (EntityType ET : EntityType.values()){
-
                 ArrayList<AbstractEntity> entities = myEM.getEntitiesOfType(ET);
-
                 for(int currentEntityToDrawIndex = 0; currentEntityToDrawIndex < entities.size(); currentEntityToDrawIndex++){
+                    AbstractEntity currentEntityToDraw = entities.get(currentEntityToDrawIndex);
+                    PositionComponent myPC = (PositionComponent) currentEntityToDraw.getComponent(ComponentType.Position);
+                    myCanvas.drawBitmap(myEM.getBitmap(ET), myPC.getX(), myPC.getY(), myPaint);
+                }
+                /*for(int currentEntityToDrawIndex = 0; currentEntityToDrawIndex < entities.size(); currentEntityToDrawIndex++){
                     if(ET.equals(EntityType.Player)){
                         PlayerEntity player = (PlayerEntity) entities.get(currentEntityToDrawIndex);
                         PositionComponent playerPC = (PositionComponent) player.getComponent(ComponentType.Position);
@@ -182,18 +179,14 @@ public class GameView extends LinearLayout {
                         myCanvas.drawBitmap(myEM.getBitmap(ET), bulletPC.getX(), bulletPC.getY() ,myPaint);
                     }
                     if(ET.equals(EntityType.MathEnemy)){
-                        EnemyEntity currentEnemy = (EnemyEntity) entities.get(currentEntityToDrawIndex);
+                        MathEnemyEntity currentEnemy = (MathEnemyEntity) entities.get(currentEntityToDrawIndex);
                         PositionComponent enemyPC = (PositionComponent) currentEnemy.getComponent(ComponentType.Position);
                         myCanvas.drawBitmap(myEM.getBitmap(ET), enemyPC.getX(), enemyPC.getY(), myPaint);
                     }
-                }
+                }*/
             }
             ourHolder.unlockCanvasAndPost(myCanvas);
         }
-    }
-
-    public SurfaceView getMyGameScreen(){
-        return myGameScreen;
     }
 
 

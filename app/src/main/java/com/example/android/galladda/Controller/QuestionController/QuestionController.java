@@ -1,13 +1,10 @@
-package com.example.android.galladda.GameController.QuestionController;
+package com.example.android.galladda.Controller.QuestionController;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
-import com.example.android.galladda.MainActivity;
-import com.example.android.galladda.Model.Engines.ChallengeType;
-import com.example.android.galladda.QuestionActivity;
+import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 import com.example.android.galladda.View.QuestionView.MathView;
 import com.example.android.galladda.View.QuestionView.QuestionView;
 
@@ -29,15 +26,16 @@ public class QuestionController implements Runnable {
 
     private Context myContext;
 
-    public QuestionController(Context context, ChallengeType CT){
+    public QuestionController(Context context, EntityType CT){
+        //TODO: MAKE THIS BETTER
         myContext = context;
-        if(CT.equals(ChallengeType.Math)){
+        if(CT.equals(EntityType.MathEnemy)){
             myQuestionView = new MathView(context);
         }
-        else if(CT.equals(ChallengeType.Shape)){
+        else if(CT.equals(EntityType.ShapeEnemy)){
          //   myQuestionView = new ShapeView(context);
         }
-        else if(CT.equals(ChallengeType.Puzzle)){
+        else if(CT.equals(EntityType.PuzzleEnemy)){
           //  myQuestionView = new PuzleView(context);
         }
     }

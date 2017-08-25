@@ -1,11 +1,12 @@
-package com.example.android.galladda;
+package com.example.android.galladda.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.android.galladda.GameController.QuestionController.QuestionController;
-import com.example.android.galladda.Model.Engines.ChallengeType;
+import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
+import com.example.android.galladda.Controller.QuestionController.QuestionController;
 
 public class QuestionActivity extends AppCompatActivity {
 
@@ -14,7 +15,16 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myQuestionController = new QuestionController(this, ChallengeType.Math);
+        Intent intent = getIntent();
+        String myChallengeString = intent.getStringExtra("Challenge Type");
+        EntityType challengeType = null;
+        for(EntityType CT : EntityType.values()){
+            if(CT.name().equals(myChallengeString)){
+                challengeType = CT;
+                break;
+            }
+        }
+        myQuestionController = new QuestionController(this, challengeType);
         setContentView((View) myQuestionController.getMyQuestionView());
     }
 

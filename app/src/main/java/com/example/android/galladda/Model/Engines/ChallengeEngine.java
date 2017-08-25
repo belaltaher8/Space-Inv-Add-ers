@@ -1,9 +1,7 @@
 package com.example.android.galladda.Model.Engines;
 
-import android.util.Log;
-
-import com.example.android.galladda.EntityComponent.Entities.EntityManager;
-import com.example.android.galladda.EntityComponent.Entities.EntityType;
+import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
+import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 
 import java.util.HashMap;
 
@@ -14,7 +12,7 @@ import java.util.HashMap;
 public class ChallengeEngine extends AbstractEngine {
 
     private boolean startChallenge;
-    private ChallengeType myChallenge;
+    private EntityType myChallenge;
 
 
     public ChallengeEngine(EntityManager aEM){
@@ -26,20 +24,15 @@ public class ChallengeEngine extends AbstractEngine {
     @Override
     public void update() {
         HashMap<EntityType, Integer> enemyDeaths = myEM.getEnemyDeaths();
-        if(enemyDeaths.get(EntityType.MathEnemy) >= 3){
-            startChallenge = true;
-            myChallenge = ChallengeType.Math;
-            enemyDeaths.put(EntityType.MathEnemy, 0);
-        }
-        else if(enemyDeaths.get(EntityType.PuzzleEnemy) >= 3){
-            startChallenge = true;
-            myChallenge = ChallengeType.Puzzle;
-            enemyDeaths.put(EntityType.PuzzleEnemy, 0);
-        }
-        else if(enemyDeaths.get(EntityType.ShapesEnemy) >= 3){
-            startChallenge = true;
-            myChallenge = ChallengeType.Shape;
-            enemyDeaths.put(EntityType.ShapesEnemy, 0);
+        for (EntityType e : EntityType.values()) {
+            if (e.name().contains("Enemy")) {
+                if (enemyDeaths.get(e) >= 3) {
+                    startChallenge = true;
+                    myChallenge = e;
+                    enemyDeaths.put(e, 0);
+                    return;
+                }
+            }
         }
     }
 
@@ -47,7 +40,7 @@ public class ChallengeEngine extends AbstractEngine {
         return startChallenge;
     }
 
-    public ChallengeType checkMyChallenge(){
+    public EntityType checkMyChallenge(){
         return myChallenge;
     }
 

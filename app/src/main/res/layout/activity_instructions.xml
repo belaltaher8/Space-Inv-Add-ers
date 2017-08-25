@@ -16,7 +16,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:text = "Welcome to Alien Invadders!"
+            android:text = "Welcome to Space Invadders!"
             android:textAlignment="center"
             android:textSize="25dp"
             android:textColor="@android:color/white"/>
@@ -28,7 +28,7 @@
             android:layout_marginRight = "30dp"
             android:textAlignment="center"
             android:textSize = "17dp"
-            android:text="Welcome, cadet! You've just been recruited by the most powerful anti-alien force in the galaxy! Your mission is to fend off wave after wave of alien as they attempt to destroy the Earth. But be careful, these aren't your regular aliens. After every few aliens you take out, they'll test your knowledge to see if the human race is worth sparing. If you get their question wrong, they'll get angry! Your only chance at saving the Earth is to shoot as many aliens as possible and get all their questions right! Now get out there, cadet! Show those aliens what we humans can do!"
+            android:text="Welcome, cadet! You've just been recruited by the most powerful anti-alien force in the galaxy! Your mission is to fend off wave after wave of aliens as they attempt to destroy the Earth. But be careful, these aren't any regular aliens. After every few aliens you take out, they'll test your knowledge to see if the human race is worth sparing. Every question you get wrong will make them get angrier! Your only chance at saving the Earth is to shoot all the aliens and get all their questions right! Now get out there, cadet! Show those aliens what we humans can do!"
             android:textColor="@android:color/white"/>
 
     </LinearLayout>

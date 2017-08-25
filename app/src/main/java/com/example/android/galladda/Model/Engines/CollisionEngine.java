@@ -5,11 +5,11 @@ import android.graphics.Rect;
 
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
-import com.example.android.galladda.EntityComponent.Entities.AbstractEntity;
-import com.example.android.galladda.EntityComponent.Entities.BulletEntity;
-import com.example.android.galladda.EntityComponent.Entities.EnemyEntity;
-import com.example.android.galladda.EntityComponent.Entities.EntityManager;
-import com.example.android.galladda.EntityComponent.Entities.EntityType;
+import com.example.android.galladda.EntityComponent.Entities.General.AbstractEntity;
+import com.example.android.galladda.EntityComponent.Entities.Bullets.BulletEntity;
+import com.example.android.galladda.EntityComponent.Entities.Enemies.MathEnemyEntity;
+import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
+import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 
 import java.util.ArrayList;
 
@@ -38,7 +38,7 @@ public class CollisionEngine extends AbstractEngine {
             int currentEnemyIndex = 0;
 
             while(currentEnemyIndex < myMathEnemies.size()){
-                EnemyEntity currentEnemy = (EnemyEntity) myMathEnemies.get(currentEnemyIndex);
+                MathEnemyEntity currentEnemy = (MathEnemyEntity) myMathEnemies.get(currentEnemyIndex);
                 PositionComponent enemyPos = (PositionComponent) currentEnemy.getComponent(ComponentType.Position);
                 Bitmap enemyBitmap = myEM.getBitmap(EntityType.MathEnemy);
                 Rect myEnemyCollisionSensor = new Rect((int) enemyPos.getX(), (int) enemyPos.getY(), (int) enemyPos.getX() + enemyBitmap.getWidth(), (int) enemyPos.getY() + enemyBitmap.getHeight());

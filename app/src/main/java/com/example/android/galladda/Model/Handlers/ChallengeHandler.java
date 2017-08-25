@@ -1,10 +1,8 @@
-package com.example.android.galladda.GameController.PlayingController;
+package com.example.android.galladda.Model.Handlers;
 
-import android.content.Entity;
-
-import com.example.android.galladda.EntityComponent.Entities.EntityManager;
+import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
+import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
 import com.example.android.galladda.Model.Engines.ChallengeEngine;
-import com.example.android.galladda.Model.Engines.ChallengeType;
 
 /**
  * Created by Belal Taher on 8/18/2017.
@@ -19,18 +17,22 @@ public class ChallengeHandler {
         myChallengeEngine = myCE;
     }
 
-    public ChallengeType checkIfChallengeOccured(){
+    public boolean checkIfChallengeOccured(){
         boolean startChallenge = myChallengeEngine.checkStartChallenge();
-        ChallengeType myChallenge = myChallengeEngine.checkMyChallenge();
+        EntityType myChallenge = myChallengeEngine.checkMyChallenge();
         if(startChallenge == false || myChallenge == null){
-            return null;
+            return false;
         }
         else{
-            return myChallenge;
+            return true;
         }
     }
 
     public ChallengeEngine getMyChallengeEngine(){
         return myChallengeEngine;
+    }
+
+    public EntityType getMyChallengeType(){
+        return myChallengeEngine.checkMyChallenge();
     }
 }

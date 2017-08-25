@@ -1,12 +1,14 @@
-package com.example.android.galladda;
+package com.example.android.galladda.Activities;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.android.galladda.Activities.GameActivity;
+import com.example.android.galladda.Activities.InstructionActivity;
+import com.example.android.galladda.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(view.getContext() , GameActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }
