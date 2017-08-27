@@ -26,7 +26,6 @@ public class LevelHandler {
     public LevelHandler(Context myContext){
         currentLevelEM = new EntityManager(myContext);
         createPlayer();
-        initializeEnemiesForLevel(1);
     }
 
     public void takeInScreenDimensions(int[] screenDimensions){
@@ -40,16 +39,27 @@ public class LevelHandler {
         myPlayers.add(new PlayerEntity());
     }
 
-    private void initializeEnemiesForLevel(int level){
+    public void initializeEnemiesForLevel(int level){
         resetPlayerOne();
         if(level == 1){
             ArrayList<AbstractEntity> myEnemies = currentLevelEM.getEntitiesOfType(EntityType.MathEnemy);
-            for(int i = 1; i < 5; i ++){
+            for(int i = 1 ; i < 4; i++){
                 MathEnemyEntity enemyToAdd = new MathEnemyEntity();
                 PositionComponent enemyPC = (PositionComponent) enemyToAdd.getComponent(ComponentType.Position);
-                enemyPC.setY(20);
-                enemyPC.setX(200*i);
+                enemyPC.setY(100*i);
+                enemyPC.setX(screenWidth/2);
+                MathEnemyEntity enemyToAdd2 = new MathEnemyEntity();
+                PositionComponent enemyPC2 = (PositionComponent) enemyToAdd2.getComponent(ComponentType.Position);
+                enemyPC2.setY(100*i);
+                enemyPC2.setX(screenWidth/2+200);
+                MathEnemyEntity enemyToAdd3 = new MathEnemyEntity();
+                PositionComponent enemyPC3 = (PositionComponent) enemyToAdd3.getComponent(ComponentType.Position);
+                enemyPC3.setY(100*i);
+                enemyPC3.setX(screenWidth/2-200);
                 myEnemies.add(enemyToAdd);
+                myEnemies.add(enemyToAdd2);
+                myEnemies.add(enemyToAdd3);
+
             }
         }
     }

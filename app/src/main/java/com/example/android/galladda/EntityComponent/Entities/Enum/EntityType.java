@@ -9,8 +9,9 @@ import com.example.android.galladda.EntityComponent.Entities.Enemies.PuzzleEnemy
 //NOTE: ALL ENUMS FOR ENEMY TYPE MUST CONTAIN THE WORD "Enemy" IN THEM
 
 public enum EntityType {
-    Player, Bullet,
+    Player, GoodBullet,
     MathEnemy,
     PuzzleEnemy,
     ShapeEnemy,
+    BadBullet
 }

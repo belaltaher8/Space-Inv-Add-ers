@@ -17,7 +17,7 @@ import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
 import com.example.android.galladda.EntityComponent.Components.VelocityComponent;
 import com.example.android.galladda.EntityComponent.Entities.General.AbstractEntity;
-import com.example.android.galladda.EntityComponent.Entities.Bullets.BulletEntity;
+import com.example.android.galladda.EntityComponent.Entities.Bullets.GoodBulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 
@@ -129,7 +129,7 @@ public class GameView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 //TODO: FIX THIS SO THAT IT DOESNT SHOOT WHEN PAUSED
-                BulletEntity newBullet = myEM.getPlayerOne().shoot();
+                GoodBulletEntity newBullet = myEM.getPlayerOne().shoot();
                 myEM.addBullet(newBullet);
             }
 

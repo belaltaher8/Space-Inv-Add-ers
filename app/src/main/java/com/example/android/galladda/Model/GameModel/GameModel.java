@@ -3,6 +3,7 @@ package com.example.android.galladda.Model.GameModel;
 import android.content.Context;
 
 import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
+import com.example.android.galladda.Model.Engines.AIEngine;
 import com.example.android.galladda.Model.Handlers.ChallengeHandler;
 import com.example.android.galladda.Model.Handlers.LevelHandler;
 import com.example.android.galladda.Model.Engines.AbstractEngine;
@@ -52,6 +53,7 @@ public class GameModel {
         myEngines.add(new MovementEngine(myEM));
         myEngines.add(new CollisionEngine(myEM));
         myEngines.add(new ChallengeEngine(myEM));
+        myEngines.add(new AIEngine(myEM));
     }
 
     public ChallengeHandler getMyChallengeHandler(){

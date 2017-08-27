@@ -6,7 +6,7 @@ import android.graphics.Rect;
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
 import com.example.android.galladda.EntityComponent.Entities.General.AbstractEntity;
-import com.example.android.galladda.EntityComponent.Entities.Bullets.BulletEntity;
+import com.example.android.galladda.EntityComponent.Entities.Bullets.GoodBulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.Enemies.MathEnemyEntity;
 import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
@@ -26,14 +26,18 @@ public class CollisionEngine extends AbstractEngine {
     
     @Override
     public void update() {
+        updateGoodBullets();
+    }
+
+    private void updateGoodBullets(){
         boolean killed = false;
-        ArrayList<AbstractEntity> myBullets =  myEM.getEntitiesOfType(EntityType.Bullet);
+        ArrayList<AbstractEntity> myBullets =  myEM.getEntitiesOfType(EntityType.GoodBullet);
         ArrayList<AbstractEntity> myMathEnemies = myEM.getEntitiesOfType(EntityType.MathEnemy);
         int currentBulletIndex = 0;
         while(currentBulletIndex < myBullets.size()){
-            BulletEntity currentBullet = (BulletEntity) myBullets.get(currentBulletIndex);
+            GoodBulletEntity currentBullet = (GoodBulletEntity) myBullets.get(currentBulletIndex);
             PositionComponent bulletPos = (PositionComponent) currentBullet.getComponent(ComponentType.Position);
-            Bitmap bulletBitmap = myEM.getBitmap(EntityType.Bullet);
+            Bitmap bulletBitmap = myEM.getBitmap(EntityType.GoodBullet);
             Rect myBulletCollisionSensor = new Rect((int) bulletPos.getX(), (int) bulletPos.getY(), (int) bulletPos.getX()+bulletBitmap.getWidth(), (int) bulletPos.getY() + bulletBitmap.getHeight());
             int currentEnemyIndex = 0;
 

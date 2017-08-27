@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.example.android.galladda.EntityComponent.Entities.Bullets.BulletEntity;
+import com.example.android.galladda.EntityComponent.Entities.Bullets.GoodBulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 import com.example.android.galladda.EntityComponent.Entities.Player.PlayerEntity;
 import com.example.android.galladda.R;
@@ -63,7 +64,8 @@ public class EntityManager {
     }
 
     public void addBullet(BulletEntity myBullet){
-        ArrayList<AbstractEntity> myBullets = myEntities.get(EntityType.Bullet);
+        EntityType typeOfBullet = myBullet.getMyEntityType();
+        ArrayList<AbstractEntity> myBullets = myEntities.get(typeOfBullet);
         myBullets.add(myBullet);
     }
 
@@ -99,7 +101,8 @@ public class EntityManager {
         Bitmap bitmapShip = BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.ship);
         bitmapShip = bitmapShip.createScaledBitmap(bitmapShip,150,150,false);
         entityBitmaps.put(EntityType.Player, bitmapShip);
-        entityBitmaps.put(EntityType.Bullet, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.bullet));
+        entityBitmaps.put(EntityType.GoodBullet, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.bullet));
+        entityBitmaps.put(EntityType.BadBullet, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.bullet));
         entityBitmaps.put(EntityType.MathEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.mathenemy));
         entityBitmaps.put(EntityType.PuzzleEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.shapeenemy));
         entityBitmaps.put(EntityType.ShapeEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.puzzleenemy));

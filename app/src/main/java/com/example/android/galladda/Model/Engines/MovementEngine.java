@@ -61,12 +61,16 @@ public class MovementEngine extends AbstractEngine {
                     myPC.setX(RIGHT_SIDE_OF_SCREEN);
                 }
             }
-            else if (e.getMyEntityType().equals(EntityType.Bullet)){
+            else if (e.getMyEntityType().equals(EntityType.GoodBullet)){
                 if(myPC.getY() < TOP_OF_SCREEN){
-                    myEM.getEntitiesOfType(EntityType.Bullet).remove(e);
+                    myEM.getEntitiesOfType(EntityType.GoodBullet).remove(e);
                 }
             }
-            //TODO: ELSE IF FOR ENEMY BULLETS
+            else if (e.getMyEntityType().equals(EntityType.BadBullet)){
+                if(myPC.getY() > BOTTOM_OF_SCREEN){
+                    myEM.getEntitiesOfType(EntityType.BadBullet).remove(e);
+                }
+            }
         }
     }
 

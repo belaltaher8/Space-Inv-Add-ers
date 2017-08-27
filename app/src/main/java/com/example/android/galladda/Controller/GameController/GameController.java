@@ -35,6 +35,7 @@ public class GameController implements Runnable{
         myGameModel = new GameModel(myContext);
         myGameModel.takeInScreenDimensions(myGameView.getScreenDimensions());
         myGameView.attachEM(myGameModel.getMyLevelHandler().getCurrentLevelEM());
+        myGameModel.getMyLevelHandler().initializeEnemiesForLevel(1);
     }
 
     public GameView getGameView(){
