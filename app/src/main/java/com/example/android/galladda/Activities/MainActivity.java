@@ -13,7 +13,7 @@ import com.example.android.galladda.R;
 /**
  * @author Belal Taher
  * Created on 8/24/2017.
- * The MainActivity class is the first activity loaded when the app starts. It lets the user either start the game or read the instructions.
+ * The MainActivity class is the activity that loads upon starting the app. It lets the user navigate into the game or into the instructions.
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Sets the view to the activity_title.xml file in the layout resources folder
+        //Sets the view to the activity_title.xml file in the res/layout folder
         setContentView(R.layout.activity_title);
 
         //Makes the "Instructions" button go to the first instructions screen

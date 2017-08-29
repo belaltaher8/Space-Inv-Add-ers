@@ -25,7 +25,7 @@ public class SecondInstructionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Sets the view to the activity_second_instructions.xml file in the layout resources folder
+        //Sets the view to the activity_second_instructions.xml file in the res/layout folder
         setContentView(R.layout.activity_second_instructions);
 
         //Makes it so that wherever the user clicks, he/she is  sent back to the main menu

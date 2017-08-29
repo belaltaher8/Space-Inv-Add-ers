@@ -11,7 +11,7 @@ import com.example.android.galladda.R;
 /**
  * @author Belal Taher
  * Created on 8/24/2017.
- * The InstructionActivity class is the first instruction screen that the player sees. It describes the story of the game.
+ * The InstructionActivity class is the activity that presents the story of the game.
  */
 
 public class InstructionActivity extends AppCompatActivity {
@@ -25,7 +25,7 @@ public class InstructionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Sets the view to the activity_instructions.xml file in the layout resources folder
+        //Sets the view to the activity_instructions.xml file in the res/layout folder
         setContentView(R.layout.activity_instructions);
 
         //Makes the "Back" button finish this activity

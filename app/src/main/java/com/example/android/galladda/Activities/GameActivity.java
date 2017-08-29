@@ -8,7 +8,7 @@ import com.example.android.galladda.Controller.GameController.GameController;
 /**
  * @author Belal Taher
  * Created on 8/24/2017.
- * The GameActivity class is the main game activity. It holds the controller part of the MVC paradigm that this game uses
+ * The GameActivity class is the activity in which the game is played.
  */
 
 public class GameActivity extends AppCompatActivity {

@@ -17,7 +17,7 @@ import com.example.android.galladda.Controller.QuestionController.QuestionContro
 
 public class QuestionActivity extends AppCompatActivity {
 
-    //The question controller makes sure the correct question view is loaded based on the type of challenge being currently executed
+    //The question controller makes sure the correct question view is loaded based on the type of challenge currently being executed
     private QuestionController myQuestionController;
 
     /**
