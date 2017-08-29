@@ -10,7 +10,9 @@ import com.example.android.galladda.EntityComponent.Entities.General.EntityManag
 import java.util.ArrayList;
 
 /**
- * Created by Belal Taher on 8/25/2017.
+ * @author Belal Taher
+ * Created on 8/25/2017.
+ * The AIEngine class handles making the enemy entities shoot according to a pseudo-random algorithm
  */
 
 public class AIEngine extends AbstractEngine {
@@ -19,8 +21,13 @@ public class AIEngine extends AbstractEngine {
         super(aEM);
     }
 
+    /**
+     * This method retrieves all the enemies from the entity manager and updates their AI component and if the condition to shoot
+     * for that enemy's respective AI component is currently being satisfied, the engine makes the AI shoot a bullet
+     */
     @Override
     public void update() {
+        //TODO: make this algorithm better
         ArrayList<AbstractEntity> myEnemies = myEM.getAllEnemies();
         for(int currentEnemyIndex = 0; currentEnemyIndex < myEnemies.size(); currentEnemyIndex++){
             AbstractEnemy currentEnemy = (AbstractEnemy) myEnemies.get(currentEnemyIndex);
