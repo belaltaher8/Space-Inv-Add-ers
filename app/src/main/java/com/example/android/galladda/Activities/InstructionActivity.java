@@ -9,16 +9,26 @@ import android.widget.Button;
 import com.example.android.galladda.R;
 
 /**
- * Created by Belal Taher on 8/24/2017.
+ * @author Belal Taher
+ * Created on 8/24/2017.
+ * The InstructionActivity class is the first instruction screen that the player sees. It describes the story of the game.
  */
 
 public class InstructionActivity extends AppCompatActivity {
 
 
+    /**
+     * This method is called on creation of the activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Sets the view to the activity_instructions.xml file in the layout resources folder
         setContentView(R.layout.activity_instructions);
+
+        //Makes the "Back" button finish this activity
         Button myEndButton = (Button) findViewById(R.id.back_button);
         myEndButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,6 +36,8 @@ public class InstructionActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        //Makes the "Controls" button go to the second instructions screen
         Button myNextButton = (Button) findViewById(R.id.next_button);
         myNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +56,6 @@ public class InstructionActivity extends AppCompatActivity {
     public void onPause(){
         super.onPause();
     }
-
 
     @Override
     public void onBackPressed(){
