@@ -14,11 +14,15 @@ import java.util.ArrayList;
 
 
 /**
- * Created by Belal Taher on 8/15/2017.
+ * @author Belal Taher
+ * Created on 8/15/2017.
+ * The MovementEngine class handles updating the position component of entities using the velocity component. It also deals with removing
+ * entities from the entity manager after they go past the screen boundaries.
  */
 
 public class MovementEngine extends AbstractEngine {
 
+    //Instance variables that hold the boundaries of the screen
     private int LEFT_SIDE_OF_SCREEN = 0;
     private int RIGHT_SIDE_OF_SCREEN;
     private int TOP_OF_SCREEN = 0;
@@ -29,16 +33,28 @@ public class MovementEngine extends AbstractEngine {
         super(aEM);
     }
 
+    /**
+     * This method updates the position component of all entities and checks to see if the update moved any of the entities
+     * out of bounds.
+     */
     public void update(){
         updateAll();
         checkBoundaries();
     }
 
+    /**
+     * This method sets the boundaries of of the screen
+     *
+     * @param boundaries an 2D array with 2 indices, screenDimensions[0] is the width and screenDimensions[1] is the height
+     */
     public void attachBoundaries(int[] boundaries){
         RIGHT_SIDE_OF_SCREEN = boundaries[0] - 150;
         BOTTOM_OF_SCREEN = boundaries[1];
     }
 
+    /**
+     * This method updates the position of all entities according to the entities' current velocities
+     */
     private void updateAll(){
         ArrayList<AbstractEntity> allEntities = myEM.getAllEntities();
         for(AbstractEntity e : allEntities){
@@ -49,6 +65,11 @@ public class MovementEngine extends AbstractEngine {
         }
     }
 
+    /**
+     * This method checks to see if the last update that occured moved any entities out of bounds. If the entity is a player,
+     * it adjusts the position so that the player is still in bounds. If the entity is a bullet, it removes the bullet from the
+     * entity manager.
+     */
     private void checkBoundaries(){
         ArrayList<AbstractEntity> allEntities = myEM.getAllEntities();
         for(AbstractEntity e : allEntities){

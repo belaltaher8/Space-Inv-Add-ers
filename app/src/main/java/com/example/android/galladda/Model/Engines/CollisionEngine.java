@@ -14,7 +14,10 @@ import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 import java.util.ArrayList;
 
 /**
- * Created by Belal Taher on 8/17/2017.
+ * @author Belal Taher
+ * Created on 8/17/2017.
+ * The CollisionEngine class uses the current position of entities and the dimensions of entities to draw invisible rectangles
+ * that serve as collision detectors. If two of these invisible rectangles intersect, a collision is occuring.
  */
 
 public class CollisionEngine extends AbstractEngine {
@@ -23,13 +26,20 @@ public class CollisionEngine extends AbstractEngine {
         super(aEM);
     }
 
-    
+    /**
+     * This method checks if any of the player's bullets are intersecting with enemies and checks if
+     * any of the enemies' bullets are intersecting with the player
+     */
     @Override
     public void update() {
         updateGoodBullets();
     }
 
+    /**
+     * This method uses the bitmap of the enemies and player's bullets to draw collision detectors and see if are intersecting
+     */
     private void updateGoodBullets(){
+        //TODO: comment this algorithm
         boolean killed = false;
         ArrayList<AbstractEntity> myBullets =  myEM.getEntitiesOfType(EntityType.GoodBullet);
         ArrayList<AbstractEntity> myMathEnemies = myEM.getEntitiesOfType(EntityType.MathEnemy);
@@ -67,6 +77,12 @@ public class CollisionEngine extends AbstractEngine {
         }
     }
 
+    /**
+     * If an collision occurs between a player bullet and an enemy, this method updates the entity manager because
+     * the challenge engine needs to know how many deaths of each enemy type have occurred
+     *
+     * @param ET the entity type of the enemy that just died
+     */
     private void addEnemyDeath(EntityType ET){
         myEM.addEnemyDeath(ET);
     }

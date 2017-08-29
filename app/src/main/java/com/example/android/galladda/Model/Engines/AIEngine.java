@@ -12,7 +12,8 @@ import java.util.ArrayList;
 /**
  * @author Belal Taher
  * Created on 8/25/2017.
- * The AIEngine class handles making the enemy entities shoot according to a pseudo-random algorithm
+ * The AIEngine class updates the AI component of entities. It uses this component
+ * to make the enemy entities shoot according to a pseudo-random algorithm
  */
 
 public class AIEngine extends AbstractEngine {
