@@ -1,7 +1,9 @@
 package com.example.android.galladda.EntityComponent.Components;
 
 /**
- * Created by Belal Taher on 8/15/2017.
+ * @author Belal Taher
+ * Created on 8/15/2017.
+ * The PointComponent class keeps track of the amount of points that the player has accumulated by destroying enemies and answering questions
  */
 
 public class PointComponent implements IComponent {
@@ -16,6 +18,11 @@ public class PointComponent implements IComponent {
         return points;
     }
 
+    /**
+     * Returns the component type of this component
+     *
+     * @return the enum indicating that this is a Point Component
+     */
     @Override
     public ComponentType getComponentType() {
         return ComponentType.Point;

@@ -1,7 +1,9 @@
 package com.example.android.galladda.EntityComponent.Components;
 
 /**
- * Created by Belal Taher on 8/15/2017.
+ * @author Belal Taher
+ * Created on 8/15/2017.
+ * The ComponentType class is an enum that holds all the different kinds of components
  */
 
 public enum ComponentType {
