@@ -27,7 +27,7 @@ import java.util.ArrayList;
 /**
  * @author Belal Taher
  * Created on 8/14/2017.
- * The GameView class is the View that's loaded when the game is actually playing. It is the View component of the MVC Paradigm
+ * The GameView class is the view that's loaded when the game is actually playing. It is the View component of the MVC Paradigm
  */
 
 public class GameView extends LinearLayout {

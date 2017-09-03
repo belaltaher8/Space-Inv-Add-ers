@@ -14,11 +14,14 @@ import com.example.android.galladda.R;
 import java.util.Random;
 
 /**
- * Created by Belal Taher on 8/19/2017.
+ * @author Belal Taher
+ * Created on 8/19/2017.
+ * The MathView class is the view that's loaded when a math challenge is executed
  */
 
 public class MathView extends QuestionView {
 
+    //All the necessary components of a math equation
     private int answer;
     private int firstNum;
     private int secondNum;
@@ -28,9 +31,16 @@ public class MathView extends QuestionView {
         super(context);
     }
 
+    /**
+     * This method randomly generates and stores the math question
+     */
     protected void setUpQuestion(){
+
+        //The first and second number are any random number from 0-20
         firstNum = rand.nextInt(21);
         secondNum = rand.nextInt(21);
+
+        //The operation is one of three: addition, subtraction, or multiplcation
         int operation = rand.nextInt(3);
         if(operation == 0){  //ADDITION
             answer = firstNum + secondNum;
@@ -46,8 +56,14 @@ public class MathView extends QuestionView {
         }
     }
 
+    /**
+     * This method sets up question screen
+     * @param context context for this activity
+     */
     protected void setUpQuestionScreen(Context context){
         super.setUpQuestionScreen(context);
+
+        //Sets the prompt text and equation text and adds it to the view
         questionText.setText("What is the answer the following equation?");
         String equation = firstNum + operatorSymbol + secondNum;
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
@@ -63,9 +79,16 @@ public class MathView extends QuestionView {
         this.addView(equationText);
     }
 
-
+    /**
+     * This method assigns values to the answer buttons
+     * @param myButtons an array containing all the answer buttons
+     * @param correctChoice an int indicating which index of the myButtons array will be the button with the correct answer
+     */
     protected void assignValuesToAnswerButtons(Button[] myButtons, int correctChoice){
+        //Sets the text for the correct choice as the answer
         myButtons[correctChoice].setText("" + answer);
+
+        //Iterates through the other answer buttons and adds a random offset between 1-10 to the answer to generate fake answers
         for(int i = 0; i < myButtons.length; i++){
             if(!(myButtons[i].getText().equals("" + answer))){
                 int offset = rand.nextInt(10)+1;
