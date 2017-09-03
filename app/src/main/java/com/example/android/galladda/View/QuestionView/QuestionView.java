@@ -13,19 +13,30 @@ import com.example.android.galladda.R;
 import java.util.Random;
 
 /**
- * Created by Belal Taher on 8/23/2017.
+ * @author Belal Taher
+ * Created on 8/23/2017.
+ * The QuestionView class generates the scaffolding for the view of any challenge. Any elements that are common to all the
+ * question types will be generated in this class.
  */
 
 public abstract class QuestionView extends LinearLayout{
 
+    //A boolean indicating if the question has been answered yet
     protected boolean correct;
+
+    //A random generator
     protected Random rand;
+
+    //The correct answer choice
     protected int correctChoice;
 
+    //The number of times the user got the question wrong
     protected int numOfWrongTries;
 
+    //The prompt text for the question
     protected TextView questionText;
 
+    //Padding around the question buttons
     public final int PADDING = 20;
 
     public QuestionView(Context myContext){
