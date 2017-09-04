@@ -80,7 +80,8 @@ public class MathView extends QuestionView {
     }
 
     /**
-     * This method assigns values to the answer buttons
+     * This method assigns generates false values for the answer buttons and assigns them to all but one button. That one
+     * button is assigned the correct answer choice
      * @param myButtons an array containing all the answer buttons
      * @param correctChoice an int indicating which index of the myButtons array will be the button with the correct answer
      */
