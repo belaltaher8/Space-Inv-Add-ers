@@ -13,5 +13,6 @@ public enum EntityType {
     MathEnemy,
     PuzzleEnemy,
     ShapeEnemy,
-    BadBullet
+    BadBullet,
+    Explosion
 }

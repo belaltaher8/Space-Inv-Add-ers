@@ -7,5 +7,5 @@ package com.example.android.galladda.EntityComponent.Components;
  */
 
 public enum ComponentType {
-    Position, Velocity, Point, AI, Lives;
+    Position, Velocity, Point, AI, Lives, Frame;
 }

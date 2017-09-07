@@ -2,10 +2,13 @@ package com.example.android.galladda.View.GameView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -16,10 +19,13 @@ import android.widget.LinearLayout;
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
 import com.example.android.galladda.EntityComponent.Components.VelocityComponent;
+import com.example.android.galladda.EntityComponent.Entities.Enemies.AbstractEnemy;
+import com.example.android.galladda.EntityComponent.Entities.Explosion.ExplosionEntity;
 import com.example.android.galladda.EntityComponent.Entities.General.AbstractEntity;
 import com.example.android.galladda.EntityComponent.Entities.Bullets.GoodBulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
+import com.example.android.galladda.R;
 
 import java.util.ArrayList;
 
@@ -221,10 +227,35 @@ public class GameView extends LinearLayout {
             //Draws each entity in the entity manager based on its position coordinates
             for (EntityType ET : EntityType.values()){
                 ArrayList<AbstractEntity> entities = myEM.getEntitiesOfType(ET);
-                for(int currentEntityToDrawIndex = 0; currentEntityToDrawIndex < entities.size(); currentEntityToDrawIndex++){
+                int currentEntityToDrawIndex = 0;
+                while(currentEntityToDrawIndex < entities.size()){
                     AbstractEntity currentEntityToDraw = entities.get(currentEntityToDrawIndex);
                     PositionComponent myPC = (PositionComponent) currentEntityToDraw.getComponent(ComponentType.Position);
-                    myCanvas.drawBitmap(myEM.getBitmap(ET), myPC.getX(), myPC.getY(), myPaint);
+
+                    //Removes enemies that got killed and starts explosion animation
+                    if(ET.name().contains("Enemy") && currentEntityToDraw.getExploding() == true){
+                        ExplosionEntity myExplosion = new ExplosionEntity();
+                        PositionComponent explosionPC = (PositionComponent) myExplosion.getComponent(ComponentType.Position);
+                        explosionPC.setX(myPC.getX());
+                        explosionPC.setY(myPC.getY());
+                        entities.remove(currentEntityToDraw);
+                        myEM.addExplosion(myExplosion);
+                    }
+                    //If its an explosion, draw it according to the appropriate frame
+                    else if(ET.name().equals("Explosion")){
+                        ExplosionEntity myExplosionEntity = (ExplosionEntity) currentEntityToDraw;
+                        Bitmap toDraw = BitmapFactory.decodeResource(this.myContext.getResources(), myExplosionEntity.getBitmapForFrame());
+                        if(toDraw!=null){
+                            myCanvas.drawBitmap(toDraw, myPC.getX(), myPC.getY(), myPaint);
+                        }
+                        currentEntityToDrawIndex++;
+                    }
+                    //Else draw regularly
+                    else{
+                        myCanvas.drawBitmap(myEM.getBitmap(ET), myPC.getX(), myPC.getY(), myPaint);
+                        currentEntityToDrawIndex++;
+                    }
+
                 }
             }
             ourHolder.unlockCanvasAndPost(myCanvas);

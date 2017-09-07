@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import com.example.android.galladda.EntityComponent.Entities.Bullets.BulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.Bullets.GoodBulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
+import com.example.android.galladda.EntityComponent.Entities.Explosion.ExplosionEntity;
 import com.example.android.galladda.EntityComponent.Entities.Player.PlayerEntity;
 import com.example.android.galladda.R;
 
@@ -63,6 +64,16 @@ public class EntityManager {
         return myEntities.get(ET);
     }
 
+    public ArrayList<AbstractEntity> getAnimatedEntities(){
+        ArrayList<AbstractEntity> myAnimatedEntities = new ArrayList<AbstractEntity>();
+        for(EntityType ET: EntityType.values()){
+            if(ET.name().contains("Explosion")){
+                myAnimatedEntities.addAll(getEntitiesOfType(ET));
+            }
+        }
+        return myAnimatedEntities;
+    }
+
     public void addBullet(BulletEntity myBullet){
         EntityType typeOfBullet = myBullet.getMyEntityType();
         ArrayList<AbstractEntity> myBullets = myEntities.get(typeOfBullet);
@@ -107,5 +118,11 @@ public class EntityManager {
         entityBitmaps.put(EntityType.PuzzleEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.shapeenemy));
         entityBitmaps.put(EntityType.ShapeEnemy, BitmapFactory.decodeResource(this.myContext.getResources(), R.drawable.puzzleenemy));
     }
+
+    public void addExplosion(ExplosionEntity myExplosion){
+        myEntities.get(EntityType.Explosion).add(myExplosion);
+    }
+
+
 
 }

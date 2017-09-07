@@ -14,9 +14,6 @@ public class PuzzleEnemyEntity extends AbstractEnemy {
 
     public PuzzleEnemyEntity(){
         super();
-        myComponents.put(ComponentType.Position, new PositionComponent(0,0));
-        myComponents.put(ComponentType.AI, new AIComponent());
-        myComponents.put(ComponentType.Velocity, new VelocityComponent(0,0));
         myEntityType = EntityType.PuzzleEnemy;
     }
 }

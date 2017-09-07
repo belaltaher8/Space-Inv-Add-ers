@@ -23,7 +23,8 @@ public class LivesEngine extends AbstractEngine {
         PlayerEntity myPlayer = myEM.getPlayerOne();
         LivesComponent myLives = (LivesComponent) myPlayer.getComponent(ComponentType.Lives);
         if(myLives.getLives() <= 0){
-            Log.d("DEBUG","YOU DIED");
+          //  Log.d("DEBUG","YOU DIED");
+            //TODO: game over screen
         }
 
     }

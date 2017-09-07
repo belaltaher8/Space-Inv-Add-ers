@@ -2,6 +2,7 @@ package com.example.android.galladda.Model.Engines;
 
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.widget.ImageView;
 
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.LivesComponent;
@@ -63,7 +64,7 @@ public class CollisionEngine extends AbstractEngine {
                 Rect myEnemyCollisionSensor = new Rect((int) enemyPos.getX(), (int) enemyPos.getY(), (int) enemyPos.getX() + enemyBitmap.getWidth(), (int) enemyPos.getY() + enemyBitmap.getHeight());
                 if(myEnemyCollisionSensor.intersect(myBulletCollisionSensor)){
                     myBullets.remove(currentBullet);
-                    myMathEnemies.remove(currentEnemy);
+                    currentEnemy.explode();
                     addEnemyDeath(EntityType.MathEnemy);
                     killed = true;
                     break;

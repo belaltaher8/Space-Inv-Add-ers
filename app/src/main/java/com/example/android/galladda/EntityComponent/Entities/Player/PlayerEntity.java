@@ -17,8 +17,6 @@ public class PlayerEntity extends AbstractEntity {
 
     public PlayerEntity(){
         super();
-        myComponents.put(ComponentType.Position, new PositionComponent(0,0));
-        myComponents.put(ComponentType.Velocity, new VelocityComponent(0,0));
         myComponents.put(ComponentType.Point, new PointComponent(0));
         myComponents.put(ComponentType.Lives, new LivesComponent());
         myEntityType = EntityType.Player;
