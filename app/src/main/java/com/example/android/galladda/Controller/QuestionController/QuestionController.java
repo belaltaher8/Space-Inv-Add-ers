@@ -75,6 +75,7 @@ public class QuestionController implements Runnable {
             //If it has been answered correctly
             if(answered == true){
                 //Finish this activity
+                ((Activity) myContext).setResult(myQuestionView.checkNumOfTimesWrong());
                 ((Activity) myContext).finish();
             }
         }

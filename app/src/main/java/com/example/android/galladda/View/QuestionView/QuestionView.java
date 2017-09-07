@@ -171,5 +171,7 @@ public abstract class QuestionView extends LinearLayout{
     public boolean checkIfQuestionAnswered(){
         return correct;
     }
+
+    public int checkNumOfTimesWrong(){ return numOfWrongTries;}
 }
 

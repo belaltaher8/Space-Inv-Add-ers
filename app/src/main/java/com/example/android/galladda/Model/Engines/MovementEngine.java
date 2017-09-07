@@ -6,6 +6,8 @@ import android.util.Log;
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
 import com.example.android.galladda.EntityComponent.Components.VelocityComponent;
+import com.example.android.galladda.EntityComponent.Entities.Bullets.BadBulletEntity;
+import com.example.android.galladda.EntityComponent.Entities.Bullets.BulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.General.AbstractEntity;
 import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
@@ -27,6 +29,8 @@ public class MovementEngine extends AbstractEngine {
     private int RIGHT_SIDE_OF_SCREEN;
     private int TOP_OF_SCREEN = 0;
     private int BOTTOM_OF_SCREEN;
+
+    private int increaseBulletSpeedBy = 0;
 
 
     public MovementEngine(EntityManager aEM){

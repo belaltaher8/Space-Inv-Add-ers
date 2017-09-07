@@ -1,7 +1,9 @@
 package com.example.android.galladda.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.example.android.galladda.Controller.GameController.GameController;
 
@@ -45,5 +47,15 @@ public class GameActivity extends AppCompatActivity {
 
         //Pauses the game thread when this activity pauses
         gameController.pause();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1){
+            int numOfTimesWrong = resultCode;
+            Log.d("WRONG: ", "" + numOfTimesWrong);
+            gameController.passNumOfTimesWrong(numOfTimesWrong);
+        }
+
     }
 }

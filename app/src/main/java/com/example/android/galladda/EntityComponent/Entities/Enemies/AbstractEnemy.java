@@ -20,7 +20,6 @@ public abstract class AbstractEnemy extends AbstractEntity {
         PositionComponent enemyPos = (PositionComponent) this.getComponent(ComponentType.Position);
         BadBulletEntity myBullet = new BadBulletEntity(enemyPos.getX() +50, enemyPos.getY());
         VelocityComponent bulletVC = (VelocityComponent) myBullet.getComponent(ComponentType.Velocity);
-        bulletVC.setY(10);
         return myBullet;
     }
 }

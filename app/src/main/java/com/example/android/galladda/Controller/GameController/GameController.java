@@ -1,5 +1,6 @@
 package com.example.android.galladda.Controller.GameController;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -135,7 +136,7 @@ public class GameController implements Runnable{
 
     /**
      * This method handles executing a challenge of any type
-     * @param CT An enum indiciating what kind of challenge to execute
+     * @param CT An enum indicating what kind of challenge to execute
      */
     private void executeChallengeOfType(EntityType CT){
 
@@ -144,9 +145,17 @@ public class GameController implements Runnable{
         intent.putExtra("Challenge Type", CT.name());
         intent.setClass(myContext, QuestionActivity.class);
 
+        Activity myActivity = (Activity) myContext;
         //Starts the question activity
-        myContext.startActivity(intent);
+        myActivity.startActivityForResult(intent, 1);
     }
+
+    public void passNumOfTimesWrong(int num){
+        Log.d("WRONG: ", "" + num);
+        myGameModel.passNumOfTimesWrong(num);
+    }
+
+
 
 
 

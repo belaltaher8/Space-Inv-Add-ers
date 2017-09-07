@@ -4,12 +4,16 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
+import com.example.android.galladda.EntityComponent.Components.LivesComponent;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
+import com.example.android.galladda.EntityComponent.Entities.Bullets.BadBulletEntity;
+import com.example.android.galladda.EntityComponent.Entities.Bullets.BulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.General.AbstractEntity;
 import com.example.android.galladda.EntityComponent.Entities.Bullets.GoodBulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.Enemies.MathEnemyEntity;
 import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
+import com.example.android.galladda.EntityComponent.Entities.Player.PlayerEntity;
 
 import java.util.ArrayList;
 
@@ -33,6 +37,7 @@ public class CollisionEngine extends AbstractEngine {
     @Override
     public void update() {
         updateGoodBullets();
+        updateBadBullets();
     }
 
     /**
@@ -74,6 +79,32 @@ public class CollisionEngine extends AbstractEngine {
                 killed = false;
             }
 
+        }
+    }
+
+    private void updateBadBullets(){
+        ArrayList<AbstractEntity> badBullets = myEM.getEntitiesOfType(EntityType.BadBullet);
+        PlayerEntity myPlayer = myEM.getPlayerOne();
+        int currentBulletIndex = 0;
+        while(currentBulletIndex < badBullets.size()){
+            BadBulletEntity currentBullet = (BadBulletEntity) badBullets.get(currentBulletIndex);
+            PositionComponent bulletPos = (PositionComponent) currentBullet.getComponent(ComponentType.Position);
+            Bitmap bulletBitmap = myEM.getBitmap(EntityType.BadBullet);
+            Rect myBulletCollisionSensor = new Rect((int) bulletPos.getX(), (int) bulletPos.getY(), (int) bulletPos.getX()+bulletBitmap.getWidth(), (int) bulletPos.getY() + bulletBitmap.getHeight());
+
+            PositionComponent myPlayerPos = (PositionComponent) myPlayer.getComponent(ComponentType.Position);
+            Bitmap playerBitmap = myEM.getBitmap(EntityType.Player);
+            int top = (int) myPlayerPos.getY() + 40;
+            Rect myPlayerCollisionSensor = new Rect((int) myPlayerPos.getX(), top, (int) myPlayerPos.getX() + playerBitmap.getWidth(), top + (playerBitmap.getHeight() - 20));
+            if(myPlayerCollisionSensor.intersect(myBulletCollisionSensor)){
+                badBullets.remove(currentBullet);
+                LivesComponent myLives = (LivesComponent) myPlayer.getComponent(ComponentType.Lives);
+                myLives.loseALife();
+                break;
+            }
+            else{
+                currentBulletIndex++;
+            }
         }
     }
 

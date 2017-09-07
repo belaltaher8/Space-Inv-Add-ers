@@ -1,9 +1,11 @@
 package com.example.android.galladda.Model.GameModel;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
 import com.example.android.galladda.Model.Engines.AIEngine;
+import com.example.android.galladda.Model.Engines.LivesEngine;
 import com.example.android.galladda.Model.Handlers.ChallengeHandler;
 import com.example.android.galladda.Model.Handlers.LevelHandler;
 import com.example.android.galladda.Model.Engines.AbstractEngine;
@@ -40,6 +42,18 @@ public class GameModel {
         myEM = myLevelHandler.getCurrentLevelEM();
         attachEngines(myEM);
         myChallengeHandler = new ChallengeHandler(myLevelHandler.getCurrentLevelEM(), (ChallengeEngine) myEngines.get(2));
+    }
+
+    public void passNumOfTimesWrong(int num){
+
+        //Finds the AI engine in the array list of myEngines
+        AIEngine myAIEngine = null;
+        for(AbstractEngine engine : myEngines){
+            if(engine instanceof AIEngine){
+                myAIEngine = (AIEngine) engine;
+            }
+        }
+        myAIEngine.addNumOfTimesWrong(num);
     }
 
     /**
@@ -82,6 +96,7 @@ public class GameModel {
         myEngines.add(new CollisionEngine(myEM));
         myEngines.add(new ChallengeEngine(myEM));
         myEngines.add(new AIEngine(myEM));
+        myEngines.add(new LivesEngine(myEM));
     }
 
     /**
