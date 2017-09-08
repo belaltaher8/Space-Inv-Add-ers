@@ -63,15 +63,6 @@ public class EntityManager {
         return myEntities.get(ET);
     }
 
-    public ArrayList<AbstractEntity> getAnimatedEntities(){
-        ArrayList<AbstractEntity> myAnimatedEntities = new ArrayList<AbstractEntity>();
-        for(EntityType ET: EntityType.values()){
-            if(ET.name().contains("Explosion")){
-                myAnimatedEntities.addAll(getEntitiesOfType(ET));
-            }
-        }
-        return myAnimatedEntities;
-    }
 
     public void addBullet(BulletEntity myBullet){
         EntityType typeOfBullet = myBullet.getMyEntityType();
