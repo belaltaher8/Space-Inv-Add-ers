@@ -6,6 +6,7 @@ import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.LivesComponent;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
 import com.example.android.galladda.EntityComponent.Entities.Enemies.AbstractEnemy;
+import com.example.android.galladda.EntityComponent.Entities.Enemies.PuzzleEnemyEntity;
 import com.example.android.galladda.EntityComponent.Entities.Enemies.ShapeEnemyEntity;
 import com.example.android.galladda.EntityComponent.Entities.General.AbstractEntity;
 import com.example.android.galladda.EntityComponent.Entities.Enemies.MathEnemyEntity;
@@ -87,15 +88,15 @@ public class LevelHandler {
         //Checks the level
         if(currentLevel == 1){
             for(int i = 1 ; i < 4; i++){
-                AbstractEnemy enemyToAdd = new ShapeEnemyEntity();
+                AbstractEnemy enemyToAdd = new PuzzleEnemyEntity();
                 PositionComponent enemyPC = (PositionComponent) enemyToAdd.getComponent(ComponentType.Position);
                 enemyPC.setY(verticalSpacing*i);
                 enemyPC.setX(enemyMiddle);
-                AbstractEnemy enemyToAdd2 = new MathEnemyEntity();
+                AbstractEnemy enemyToAdd2 = new PuzzleEnemyEntity();
                 PositionComponent enemyPC2 = (PositionComponent) enemyToAdd2.getComponent(ComponentType.Position);
                 enemyPC2.setY(verticalSpacing*i);
                 enemyPC2.setX(enemyMiddle+300);
-                AbstractEnemy enemyToAdd3 = new MathEnemyEntity();
+                AbstractEnemy enemyToAdd3 = new PuzzleEnemyEntity();
                 PositionComponent enemyPC3 = (PositionComponent) enemyToAdd3.getComponent(ComponentType.Position);
                 enemyPC3.setY(verticalSpacing*i);
                 enemyPC3.setX(enemyMiddle-300);

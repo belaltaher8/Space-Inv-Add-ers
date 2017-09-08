@@ -21,6 +21,8 @@ import java.util.Random;
 
 public abstract class QuestionView extends LinearLayout{
 
+    protected Button[] myButtons;
+
     //A boolean indicating if the question has been answered yet
     protected boolean correct;
 
@@ -59,10 +61,8 @@ public abstract class QuestionView extends LinearLayout{
     /**
      * This method is used to assign values to the answer buttons. It's unimplemented since the false answers depends on the
      * type of challenge being executed
-     * @param myButtons an array containing all the answer buttons
-     * @param correctChoice an int indicating which index of the myButtons array will have the right answer choice
      */
-    protected abstract void assignValuesToAnswerButtons(Button[] myButtons, int correctChoice);
+    protected abstract void assignValuesToAnswerButtons();
 
     /**
      * This method sets up the general layout of the question screen. For all types of challenges, the general layout of the screen
@@ -94,14 +94,14 @@ public abstract class QuestionView extends LinearLayout{
         Button choiceThree = new Button(myContext);
         Button choiceFour = new Button(myContext);
         correctChoice = rand.nextInt(4);
-        Button[] myButtons = new Button[4];
+        myButtons = new Button[4];
         myButtons[0] = choiceOne;
         myButtons[1] = choiceTwo;
         myButtons[2] = choiceThree;
         myButtons[3] = choiceFour;
-        formatButtons(myButtons);
-        assignValuesToAnswerButtons(myButtons, correctChoice);
-        assignOnClickToAnswerButtons(myButtons, correctChoice);
+        formatButtons();
+        assignValuesToAnswerButtons();
+        assignOnClickToAnswerButtons();
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT,
                 0,
@@ -117,9 +117,8 @@ public abstract class QuestionView extends LinearLayout{
 
     /**
      * This method iterates through all the buttons and formats them appropriately
-     * @param myButtons an array containing all the answer buttons
      */
-    protected void formatButtons(Button[] myButtons){
+    protected void formatButtons(){
         for(int i = 0 ; i < myButtons.length; i++){
             Button myButton = myButtons[i];
             myButton.setBackgroundColor(Color.GREEN);
@@ -130,10 +129,8 @@ public abstract class QuestionView extends LinearLayout{
 
     /**
      * This method assigns on click listeners to all the answer buttons
-     * @param myButtons an array containing all the answer buttons
-     * @param correctChoice an int indicating which index of the myButtons array holds the correct answer chocie
      */
-    protected void assignOnClickToAnswerButtons(Button[] myButtons, int correctChoice){
+    protected void assignOnClickToAnswerButtons(){
         myButtons[correctChoice].setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

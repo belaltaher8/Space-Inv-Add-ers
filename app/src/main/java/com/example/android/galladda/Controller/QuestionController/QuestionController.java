@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 import com.example.android.galladda.View.QuestionView.MathView;
+import com.example.android.galladda.View.QuestionView.PuzzleView;
 import com.example.android.galladda.View.QuestionView.QuestionView;
 import com.example.android.galladda.View.QuestionView.ShapeView;
 
@@ -52,7 +53,7 @@ public class QuestionController implements Runnable {
             myQuestionView = new ShapeView(context);
         }
         else if(CT.equals(EntityType.PuzzleEnemy)){
-          //TODO: myQuestionView = new PuzleView(context);
+            myQuestionView = new PuzzleView(context);
         }
     }
 
