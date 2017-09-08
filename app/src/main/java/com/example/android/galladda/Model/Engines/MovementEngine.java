@@ -62,10 +62,12 @@ public class MovementEngine extends AbstractEngine {
     private void updateAll(){
         ArrayList<AbstractEntity> allEntities = myEM.getAllEntities();
         for(AbstractEntity e : allEntities){
-            PositionComponent myPC = (PositionComponent) e.getComponent(ComponentType.Position);
-            VelocityComponent myVC = (VelocityComponent) e.getComponent(ComponentType.Velocity);
-            myPC.setX(myPC.getX() + myVC.getX());
-            myPC.setY(myPC.getY() + myVC.getY());
+            if(e.getExploding() != true) {
+                PositionComponent myPC = (PositionComponent) e.getComponent(ComponentType.Position);
+                VelocityComponent myVC = (VelocityComponent) e.getComponent(ComponentType.Velocity);
+                myPC.setX(myPC.getX() + myVC.getX());
+                myPC.setY(myPC.getY() + myVC.getY());
+            }
         }
     }
 

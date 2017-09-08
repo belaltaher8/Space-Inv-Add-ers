@@ -44,7 +44,11 @@ public abstract class AbstractEntity {
     }
 
     public boolean getExploding(){
-        return exploding;
+        if(exploding == true){
+            exploding = false;
+            return true;
+        }
+        return false;
     }
 
     public EntityType getMyEntityType(){

@@ -32,8 +32,9 @@ public class InstructionActivity extends AppCompatActivity {
         Button myEndButton = (Button) findViewById(R.id.back_button);
         myEndButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { //TODO: add another button in horizontal linear layout & another screen to instructions
+            public void onClick(View view) {
                 finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
 
@@ -45,6 +46,7 @@ public class InstructionActivity extends AppCompatActivity {
                 Intent i = new Intent(view.getContext() , SecondInstructionActivity.class);
                 startActivity(i);
                 finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }

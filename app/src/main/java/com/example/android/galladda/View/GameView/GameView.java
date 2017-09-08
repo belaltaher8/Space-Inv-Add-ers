@@ -233,12 +233,11 @@ public class GameView extends LinearLayout {
                     PositionComponent myPC = (PositionComponent) currentEntityToDraw.getComponent(ComponentType.Position);
 
                     //Removes enemies that got killed and starts explosion animation
-                    if(ET.name().contains("Enemy") && currentEntityToDraw.getExploding() == true){
+                    if( (ET.name().contains("Enemy") || ET.name().equals("Player")) && currentEntityToDraw.getExploding() == true){
                         ExplosionEntity myExplosion = new ExplosionEntity();
                         PositionComponent explosionPC = (PositionComponent) myExplosion.getComponent(ComponentType.Position);
                         explosionPC.setX(myPC.getX());
                         explosionPC.setY(myPC.getY());
-                        entities.remove(currentEntityToDraw);
                         myEM.addExplosion(myExplosion);
                     }
                     //If its an explosion, draw it according to the appropriate frame

@@ -122,8 +122,9 @@ public class GameController implements Runnable{
     private void playGame(){
 
         //Update the game model and draw all the entities to the screen
-        myGameModel.update();
         myGameView.draw();
+        myGameModel.update();
+
 
         //FPS calculations
         long startFrameTime = System.currentTimeMillis();
@@ -151,7 +152,6 @@ public class GameController implements Runnable{
     }
 
     public void passNumOfTimesWrong(int num){
-        Log.d("WRONG: ", "" + num);
         myGameModel.passNumOfTimesWrong(num);
     }
 

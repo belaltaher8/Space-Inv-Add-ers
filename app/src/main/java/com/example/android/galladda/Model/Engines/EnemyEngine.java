@@ -2,6 +2,7 @@ package com.example.android.galladda.Model.Engines;
 
 import com.example.android.galladda.EntityComponent.Components.AIComponent;
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
+import com.example.android.galladda.EntityComponent.Components.DeathComponent;
 import com.example.android.galladda.EntityComponent.Components.VelocityComponent;
 import com.example.android.galladda.EntityComponent.Entities.Bullets.BadBulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.Enemies.AbstractEnemy;
@@ -14,15 +15,15 @@ import java.util.ArrayList;
 /**
  * @author Belal Taher
  * Created on 8/25/2017.
- * The AIEngine class updates the AI component of entities. It uses this component
+ * The EnemyEngine class updates the AI component of entities. It uses this component
  * to make the enemy entities shoot according to a pseudo-random algorithm
  */
 
-public class AIEngine extends AbstractEngine {
+public class EnemyEngine extends AbstractEngine {
 
     private int bulletSpeed = 10;
 
-    public AIEngine(EntityManager aEM){
+    public EnemyEngine(EntityManager aEM){
         super(aEM);
     }
 
@@ -32,6 +33,28 @@ public class AIEngine extends AbstractEngine {
      */
     @Override
     public void update() {
+        updateDeath();
+        updateBullets();
+    }
+
+    private void updateDeath(){
+        ArrayList<AbstractEntity> myEnemies = myEM.getAllEnemies();
+        int currentIndex = 0;
+        while(currentIndex < myEnemies.size()){
+            AbstractEntity myEnemy = myEnemies.get(currentIndex);
+            if(((DeathComponent) myEnemy.getComponent(ComponentType.Death)).checkIfDead()){
+                EntityType enemyType = myEnemies.get(currentIndex).getMyEntityType();
+                myEnemies.remove(myEnemy);
+                myEM.getEntitiesOfType(enemyType).remove(myEnemy);
+
+            }
+            else{
+                currentIndex++;
+            }
+        }
+    }
+
+    private void updateBullets(){
         ArrayList<AbstractEntity> myEnemies = myEM.getAllEnemies();
         for(int currentEnemyIndex = 0; currentEnemyIndex < myEnemies.size(); currentEnemyIndex++){
             AbstractEnemy currentEnemy = (AbstractEnemy) myEnemies.get(currentEnemyIndex);

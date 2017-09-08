@@ -2,6 +2,7 @@ package com.example.android.galladda.EntityComponent.Entities.Enemies;
 
 import com.example.android.galladda.EntityComponent.Components.AIComponent;
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
+import com.example.android.galladda.EntityComponent.Components.DeathComponent;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
 import com.example.android.galladda.EntityComponent.Components.VelocityComponent;
 import com.example.android.galladda.EntityComponent.Entities.Bullets.BadBulletEntity;
@@ -17,6 +18,7 @@ public abstract class AbstractEnemy extends AbstractEntity {
     public AbstractEnemy(){
         super();
         myComponents.put(ComponentType.AI, new AIComponent());
+        myComponents.put(ComponentType.Death, new DeathComponent());
     }
 
     public BadBulletEntity shoot(){

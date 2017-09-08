@@ -3,7 +3,7 @@ package com.example.android.galladda.Model.GameModel;
 import android.content.Context;
 
 import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
-import com.example.android.galladda.Model.Engines.AIEngine;
+import com.example.android.galladda.Model.Engines.EnemyEngine;
 import com.example.android.galladda.Model.Engines.ExplosionEngine;
 import com.example.android.galladda.Model.Engines.LivesEngine;
 import com.example.android.galladda.Model.Handlers.ChallengeHandler;
@@ -41,16 +41,20 @@ public class GameModel {
         myLevelHandler = new LevelHandler(myContext);
         myEM = myLevelHandler.getCurrentLevelEM();
         attachEngines(myEM);
-        myChallengeHandler = new ChallengeHandler(myLevelHandler.getCurrentLevelEM(), (ChallengeEngine) myEngines.get(2));
+        for(AbstractEngine e : myEngines){
+            if(e instanceof ChallengeEngine){
+                myChallengeHandler = new ChallengeHandler(myLevelHandler.getCurrentLevelEM(), (ChallengeEngine) e);
+            }
+        }
     }
 
     public void passNumOfTimesWrong(int num){
 
         //Finds the AI engine in the array list of myEngines
-        AIEngine myAIEngine = null;
+        EnemyEngine myAIEngine = null;
         for(AbstractEngine engine : myEngines){
-            if(engine instanceof AIEngine){
-                myAIEngine = (AIEngine) engine;
+            if(engine instanceof EnemyEngine){
+                myAIEngine = (EnemyEngine) engine;
             }
         }
         myAIEngine.addNumOfTimesWrong(num);
@@ -93,9 +97,9 @@ public class GameModel {
      */
     private void attachEngines(EntityManager myEM){
         myEngines.add(new MovementEngine(myEM));
+        myEngines.add(new EnemyEngine(myEM));
         myEngines.add(new CollisionEngine(myEM));
         myEngines.add(new ChallengeEngine(myEM));
-        myEngines.add(new AIEngine(myEM));
         myEngines.add(new LivesEngine(myEM));
         myEngines.add(new ExplosionEngine(myEM));
     }

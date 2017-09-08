@@ -33,7 +33,6 @@ public class ExplosionEngine extends AbstractEngine {
             myFC.nextFrame();
 
             if(myFC.isDone()){
-                Log.d("DEBUG", "GETS HERE");
                 myExplosions.remove(myExplosionEntity);
             }
             else{

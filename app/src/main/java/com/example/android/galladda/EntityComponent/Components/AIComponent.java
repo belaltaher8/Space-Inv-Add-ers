@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * @author Belal Taher
  * Created on 8/25/2017.
- * The AIComponent class is used with the AIEngine to simulate pseudo-random shooting patterns for the enemy entities
+ * The AIComponent class is used with the EnemyEngine to simulate pseudo-random shooting patterns for the enemy entities
  */
 
 public class AIComponent implements IComponent {

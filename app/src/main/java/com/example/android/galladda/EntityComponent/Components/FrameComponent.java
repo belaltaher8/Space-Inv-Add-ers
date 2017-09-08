@@ -23,7 +23,6 @@ public class FrameComponent implements IComponent {
 
     public void nextFrame(){
         currentFrame++;
-        Log.d("FRAME", " IS " +currentFrame);
     }
 
     public int getFrame(){
