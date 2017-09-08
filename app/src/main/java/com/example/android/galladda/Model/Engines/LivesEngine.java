@@ -26,7 +26,6 @@ public class LivesEngine extends AbstractEngine {
         LivesComponent myLives = (LivesComponent) myPlayer.getComponent(ComponentType.Lives);
         if(myLives.getLives() <= 0){
             playerDied = true;
-            Log.d("PLAYER", "PLAYER IS DEAD");
         }
     }
 

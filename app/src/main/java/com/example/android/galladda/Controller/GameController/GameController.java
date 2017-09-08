@@ -96,6 +96,11 @@ public class GameController implements Runnable{
                 executeGameOverScreen();
                 myGameModel.getMyLevelHandler().getMyLivesEngine().reset();
             }
+            else if(myGameModel.getMyLevelHandler().goToNextLevel() == true){
+
+                myGameModel.getMyLevelHandler().initializeLevel(myGameModel.getMyLevelHandler().getLevel() + 1);
+                myGameModel.getMyLevelHandler().getMyLevelEngine().reset();
+            }
         }
     }
 
@@ -155,6 +160,7 @@ public class GameController implements Runnable{
 
         Activity myActivity = (Activity) myContext;
         //Starts the question activity
+        myActivity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         myActivity.startActivityForResult(intent, 1);
     }
 

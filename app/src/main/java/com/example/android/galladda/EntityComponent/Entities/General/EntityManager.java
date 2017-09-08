@@ -29,7 +29,7 @@ public class EntityManager {
         myContext = aContext;
         setUpBitmapHashMap();
         setUpMyEntities();
-        setUpEnemyDeaths();
+        resetEnemyDeaths();
     }
 
     public void addEnemyDeath(EntityType ET){
@@ -63,6 +63,17 @@ public class EntityManager {
         return myEntities.get(ET);
     }
 
+    private void resetEnemies(){
+        for(EntityType e : EntityType.values()){
+            if(e.name().contains("Enemy"))
+                myEntities.put(e, new ArrayList<AbstractEntity>());
+        }
+    }
+
+    public void addEnemy(AbstractEntity myEnemy){
+        EntityType myET = myEnemy.getMyEntityType();
+        myEntities.get(myET).add(myEnemy);
+    }
 
     public void addBullet(BulletEntity myBullet){
         EntityType typeOfBullet = myBullet.getMyEntityType();
@@ -79,7 +90,7 @@ public class EntityManager {
         return (PlayerEntity) myEntities.get(EntityType.Player).get(0);
     }
 
-    private void setUpEnemyDeaths(){
+    private void resetEnemyDeaths(){
         enemyDeaths = new HashMap<EntityType, Integer>();
         for(EntityType enemyType : EntityType.values()){
             if(enemyType.name().contains("Enemy")) {
@@ -112,6 +123,12 @@ public class EntityManager {
     public void addExplosion(ExplosionEntity myExplosion){
         myEntities.get(EntityType.Explosion).add(myExplosion);
     }
+
+    public void reset(){
+        resetEnemyDeaths();
+        resetEnemies();
+    }
+
 
 
 

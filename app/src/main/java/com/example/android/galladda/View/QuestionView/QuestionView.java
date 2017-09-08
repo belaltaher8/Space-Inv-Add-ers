@@ -122,7 +122,7 @@ public abstract class QuestionView extends LinearLayout{
     protected void formatButtons(Button[] myButtons){
         for(int i = 0 ; i < myButtons.length; i++){
             Button myButton = myButtons[i];
-            myButton.setBackgroundColor(Color.WHITE);
+            myButton.setBackgroundColor(Color.GREEN);
             myButton.setTextColor(Color.BLACK);
             myButton.setPadding(10,10,10,10);
         }

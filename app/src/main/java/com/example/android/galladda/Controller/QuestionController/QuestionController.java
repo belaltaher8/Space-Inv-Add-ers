@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 import com.example.android.galladda.View.QuestionView.MathView;
 import com.example.android.galladda.View.QuestionView.QuestionView;
+import com.example.android.galladda.View.QuestionView.ShapeView;
 
 /**
  * @author Belal Taher
@@ -48,7 +49,7 @@ public class QuestionController implements Runnable {
             myQuestionView = new MathView(context);
         }
         else if(CT.equals(EntityType.ShapeEnemy)){
-         //TODO: myQuestionView = new ShapeView(context);
+            myQuestionView = new ShapeView(context);
         }
         else if(CT.equals(EntityType.PuzzleEnemy)){
           //TODO: myQuestionView = new PuzleView(context);
@@ -76,6 +77,7 @@ public class QuestionController implements Runnable {
             if(answered == true){
                 //Finish this activity
                 ((Activity) myContext).setResult(myQuestionView.checkNumOfTimesWrong());
+                ((Activity) myContext).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 ((Activity) myContext).finish();
             }
         }

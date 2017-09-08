@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
 import com.example.android.galladda.Model.Engines.EnemyEngine;
 import com.example.android.galladda.Model.Engines.ExplosionEngine;
+import com.example.android.galladda.Model.Engines.LevelEngine;
 import com.example.android.galladda.Model.Engines.LivesEngine;
 import com.example.android.galladda.Model.Handlers.ChallengeHandler;
 import com.example.android.galladda.Model.Handlers.LevelHandler;
@@ -47,6 +48,9 @@ public class GameModel {
             }
             else if(e instanceof LivesEngine){
                 myLevelHandler.attachLivesEngine((LivesEngine) e);
+            }
+            else if(e instanceof LevelEngine){
+                myLevelHandler.attachLevelEngine((LevelEngine) e);
             }
         }
     }
@@ -105,6 +109,7 @@ public class GameModel {
         myEngines.add(new ChallengeEngine(myEM));
         myEngines.add(new LivesEngine(myEM));
         myEngines.add(new ExplosionEngine(myEM));
+        myEngines.add((new LevelEngine(myEM)));
     }
 
     /**
@@ -125,6 +130,8 @@ public class GameModel {
 
     public void passReplay(boolean replay){
         if(replay == true){
+            myChallengeHandler.getMyChallengeEngine().reset();
+            myEM.reset();
             myLevelHandler.initializeLevel(myLevelHandler.getLevel());
         }
     }

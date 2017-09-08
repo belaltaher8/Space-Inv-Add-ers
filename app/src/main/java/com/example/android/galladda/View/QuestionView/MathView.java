@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 import com.example.android.galladda.R;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
+
+import static android.R.attr.offset;
 
 /**
  * @author Belal Taher
@@ -65,7 +68,7 @@ public class MathView extends QuestionView {
         super.setUpQuestionScreen(context);
 
         //Sets the prompt text and equation text and adds it to the view
-        questionText.setText("What is the answer the following equation?");
+        questionText.setText("What is the answer to the following equation?");
         String equation = firstNum + operatorSymbol + secondNum;
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT,
@@ -89,19 +92,27 @@ public class MathView extends QuestionView {
     protected void assignValuesToAnswerButtons(Button[] myButtons, int correctChoice){
         //Sets the text for the correct choice as the answer
         myButtons[correctChoice].setText("" + answer);
-        HashSet<Integer> answersUsed = new HashSet<Integer>();
+        int[] choicesUsed = new int[4];
+        choicesUsed[correctChoice] = answer;
         //Iterates through the other answer buttons and adds a random offset between 1-10 to the answer to generate fake answers
         for(int i = 0; i < myButtons.length; i++){
             if(!(myButtons[i].getText().equals("" + answer))){
-                int offset = rand.nextInt((10)+1) - 5;
-                int fakeAnswer = answer+offset;
 
-                while(answersUsed.contains(fakeAnswer)){
-                    offset = rand.nextInt((10)+1)-5;
-                    fakeAnswer = answer+offset;
-                }
+                int fakeAnswer;
+                boolean repeat;
+                do {
+                    repeat = false;
+                    int offset = rand.nextInt((10) + 1) - 5;
+                    fakeAnswer = answer + offset;
 
-                answersUsed.add(fakeAnswer);
+                    for (int j = 0; j < choicesUsed.length; j++) {
+                        if (choicesUsed[j] == fakeAnswer) {
+                            repeat = true;
+                        }
+                    }
+                }while(repeat);
+
+                choicesUsed[i] = fakeAnswer;
                 myButtons[i].setText("" + fakeAnswer);
 
             }

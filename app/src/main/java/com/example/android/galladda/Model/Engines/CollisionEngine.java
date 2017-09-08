@@ -8,6 +8,7 @@ import com.example.android.galladda.EntityComponent.Components.DeathComponent;
 import com.example.android.galladda.EntityComponent.Components.LivesComponent;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
 import com.example.android.galladda.EntityComponent.Entities.Bullets.BadBulletEntity;
+import com.example.android.galladda.EntityComponent.Entities.Enemies.AbstractEnemy;
 import com.example.android.galladda.EntityComponent.Entities.General.AbstractEntity;
 import com.example.android.galladda.EntityComponent.Entities.Bullets.GoodBulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.Enemies.MathEnemyEntity;
@@ -48,7 +49,7 @@ public class CollisionEngine extends AbstractEngine {
         //TODO: comment this algorithm
         boolean killed = false;
         ArrayList<AbstractEntity> myBullets =  myEM.getEntitiesOfType(EntityType.GoodBullet);
-        ArrayList<AbstractEntity> myMathEnemies = myEM.getEntitiesOfType(EntityType.MathEnemy);
+        ArrayList<AbstractEntity> myEnemies = myEM.getAllEnemies();
         int currentBulletIndex = 0;
 
         while(currentBulletIndex < myBullets.size()){
@@ -58,9 +59,9 @@ public class CollisionEngine extends AbstractEngine {
             Rect myBulletCollisionSensor = new Rect((int) bulletPos.getX(), (int) bulletPos.getY(), (int) bulletPos.getX()+bulletBitmap.getWidth(), (int) bulletPos.getY() + bulletBitmap.getHeight());
             int currentEnemyIndex = 0;
 
-            while(currentEnemyIndex < myMathEnemies.size()){
+            while(currentEnemyIndex < myEnemies.size()){
 
-                MathEnemyEntity currentEnemy = (MathEnemyEntity) myMathEnemies.get(currentEnemyIndex);
+                AbstractEnemy currentEnemy = (AbstractEnemy) myEnemies.get(currentEnemyIndex);
                 PositionComponent enemyPos = (PositionComponent) currentEnemy.getComponent(ComponentType.Position);
                 Bitmap enemyBitmap = myEM.getBitmap(EntityType.MathEnemy);
                 Rect myEnemyCollisionSensor = new Rect((int) enemyPos.getX(), (int) enemyPos.getY(), (int) enemyPos.getX() + enemyBitmap.getWidth(), (int) enemyPos.getY() + enemyBitmap.getHeight());
@@ -69,7 +70,7 @@ public class CollisionEngine extends AbstractEngine {
                     myBullets.remove(currentBullet);
                     currentEnemy.explode();
                     ((DeathComponent) currentEnemy.getComponent(ComponentType.Death)).die();
-                    addEnemyDeath(EntityType.MathEnemy);
+                    addEnemyDeath(currentEnemy.getMyEntityType());
                     killed = true;
                     break;
                 }
