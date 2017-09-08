@@ -20,6 +20,7 @@
         <activity android:name=".Activities.InstructionActivity"></activity>
         <activity android:name=".Activities.SecondInstructionActivity"></activity>
         <activity android:name=".Activities.GameActivity"></activity>
+        <activity android:name=".Activities.GameOverActivity"></activity>
     </application>
 
 </manifest>

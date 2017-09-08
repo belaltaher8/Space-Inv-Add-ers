@@ -223,8 +223,10 @@ public class GameView extends LinearLayout {
 
             //Draws each entity in the entity manager based on its position coordinates
             for (EntityType ET : EntityType.values()){
+
                 ArrayList<AbstractEntity> entities = myEM.getEntitiesOfType(ET);
                 int currentEntityToDrawIndex = 0;
+
                 while(currentEntityToDrawIndex < entities.size()){
                     AbstractEntity currentEntityToDraw = entities.get(currentEntityToDrawIndex);
                     PositionComponent myPC = (PositionComponent) currentEntityToDraw.getComponent(ComponentType.Position);

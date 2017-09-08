@@ -8,8 +8,10 @@ public class LivesComponent implements IComponent {
 
     private int lives;
 
+    public static final int AMOUNT_OF_LIVES = 15;
+
     public LivesComponent(){
-        lives = 3;
+        lives = AMOUNT_OF_LIVES;
     }
 
     public void loseALife(){
@@ -18,6 +20,10 @@ public class LivesComponent implements IComponent {
 
     public int getLives(){
         return lives;
+    }
+
+    public void resetLives(){
+        lives = AMOUNT_OF_LIVES;
     }
 
     @Override

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.android.galladda.R;
 
+import java.util.HashSet;
 import java.util.Random;
 
 /**
@@ -88,13 +89,21 @@ public class MathView extends QuestionView {
     protected void assignValuesToAnswerButtons(Button[] myButtons, int correctChoice){
         //Sets the text for the correct choice as the answer
         myButtons[correctChoice].setText("" + answer);
-
+        HashSet<Integer> answersUsed = new HashSet<Integer>();
         //Iterates through the other answer buttons and adds a random offset between 1-10 to the answer to generate fake answers
         for(int i = 0; i < myButtons.length; i++){
             if(!(myButtons[i].getText().equals("" + answer))){
-                int offset = rand.nextInt(10)+1;
+                int offset = rand.nextInt((10)+1) - 5;
                 int fakeAnswer = answer+offset;
+
+                while(answersUsed.contains(fakeAnswer)){
+                    offset = rand.nextInt((10)+1)-5;
+                    fakeAnswer = answer+offset;
+                }
+
+                answersUsed.add(fakeAnswer);
                 myButtons[i].setText("" + fakeAnswer);
+
             }
         }
     }

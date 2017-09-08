@@ -14,6 +14,8 @@ import com.example.android.galladda.EntityComponent.Entities.Player.PlayerEntity
 
 public class LivesEngine extends AbstractEngine {
 
+    private boolean playerDied = false;
+
     public LivesEngine(EntityManager myEM){
         super(myEM);
     }
@@ -23,9 +25,19 @@ public class LivesEngine extends AbstractEngine {
         PlayerEntity myPlayer = myEM.getPlayerOne();
         LivesComponent myLives = (LivesComponent) myPlayer.getComponent(ComponentType.Lives);
         if(myLives.getLives() <= 0){
-          //  Log.d("DEBUG","YOU DIED");
-            //TODO: game over screen
+            playerDied = true;
+            Log.d("PLAYER", "PLAYER IS DEAD");
         }
+    }
 
+    public boolean checkIfPlayerDied(){
+        return playerDied;
+    }
+
+    public void reset(){
+        playerDied = false;
+        PlayerEntity myPlayer = myEM.getPlayerOne();
+        LivesComponent myLives = (LivesComponent) myPlayer.getComponent(ComponentType.Lives);
+        myLives.resetLives();
     }
 }

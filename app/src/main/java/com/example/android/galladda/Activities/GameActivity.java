@@ -53,8 +53,15 @@ public class GameActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1){
             int numOfTimesWrong = resultCode;
-            Log.d("WRONG: ", "" + numOfTimesWrong);
             gameController.passNumOfTimesWrong(numOfTimesWrong);
+        }
+        else if(requestCode == 2){
+            if(resultCode == GameOverActivity.RESUME){
+                boolean replay = true;
+                gameController.passReplay(replay);
+            }
+
+
         }
 
     }

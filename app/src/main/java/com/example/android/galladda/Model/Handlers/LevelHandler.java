@@ -9,6 +9,7 @@ import com.example.android.galladda.EntityComponent.Entities.Enemies.MathEnemyEn
 import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 import com.example.android.galladda.EntityComponent.Entities.Player.PlayerEntity;
+import com.example.android.galladda.Model.Engines.LivesEngine;
 
 import java.util.ArrayList;
 
@@ -21,12 +22,17 @@ import java.util.ArrayList;
 
 public class LevelHandler {
 
+    //Current level
+    int level;
+
     //Level handler initializes the entity manager
     EntityManager currentLevelEM;
 
     //The player's starting position and enemies' starting positions are functions of the device's width and height
     private int screenWidth;
     private int screenHeight;
+
+    private LivesEngine myLivesEngine;
 
     public LevelHandler(Context myContext){
         currentLevelEM = new EntityManager(myContext);
@@ -68,25 +74,29 @@ public class LevelHandler {
 
         //Checks the level
         if(currentLevel == 1){
-            ArrayList<AbstractEntity> myEnemies = currentLevelEM.getEntitiesOfType(EntityType.MathEnemy);
+            //TODO: find a way so that when a new level is started the entities are duplicated
+            ArrayList<AbstractEntity> myEnemies = new ArrayList<AbstractEntity>();
+            int verticalSpacing = 150;
+            int enemyMiddle = screenWidth/2 -50;
             for(int i = 1 ; i < 4; i++){
                 MathEnemyEntity enemyToAdd = new MathEnemyEntity();
                 PositionComponent enemyPC = (PositionComponent) enemyToAdd.getComponent(ComponentType.Position);
-                enemyPC.setY(100*i);
-                enemyPC.setX(screenWidth/2);
+                enemyPC.setY(verticalSpacing*i);
+                enemyPC.setX(enemyMiddle);
                 MathEnemyEntity enemyToAdd2 = new MathEnemyEntity();
                 PositionComponent enemyPC2 = (PositionComponent) enemyToAdd2.getComponent(ComponentType.Position);
-                enemyPC2.setY(100*i);
-                enemyPC2.setX(screenWidth/2+200);
+                enemyPC2.setY(verticalSpacing*i);
+                enemyPC2.setX(enemyMiddle+300);
                 MathEnemyEntity enemyToAdd3 = new MathEnemyEntity();
                 PositionComponent enemyPC3 = (PositionComponent) enemyToAdd3.getComponent(ComponentType.Position);
-                enemyPC3.setY(100*i);
-                enemyPC3.setX(screenWidth/2-200);
+                enemyPC3.setY(verticalSpacing*i);
+                enemyPC3.setX(enemyMiddle-300);
                 myEnemies.add(enemyToAdd);
                 myEnemies.add(enemyToAdd2);
                 myEnemies.add(enemyToAdd3);
 
             }
+            level = currentLevel;
         }
     }
 
@@ -97,6 +107,22 @@ public class LevelHandler {
         PositionComponent playerPC = (PositionComponent)currentLevelEM.getPlayerOne().getComponent(ComponentType.Position);
         playerPC.setX(screenWidth/2-75);
         playerPC.setY(screenHeight/1.5f);
+    }
+
+    public void attachLivesEngine(LivesEngine aLivesEngine){
+        myLivesEngine = aLivesEngine;
+    }
+
+    public boolean checkIfPlayerDied(){
+        return myLivesEngine.checkIfPlayerDied();
+    }
+
+    public int getLevel(){
+        return level;
+    }
+
+    public LivesEngine getMyLivesEngine(){
+        return myLivesEngine;
     }
 
     /**

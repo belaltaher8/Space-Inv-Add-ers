@@ -45,6 +45,9 @@ public class GameModel {
             if(e instanceof ChallengeEngine){
                 myChallengeHandler = new ChallengeHandler(myLevelHandler.getCurrentLevelEM(), (ChallengeEngine) e);
             }
+            else if(e instanceof LivesEngine){
+                myLevelHandler.attachLivesEngine((LivesEngine) e);
+            }
         }
     }
 
@@ -119,4 +122,10 @@ public class GameModel {
      * @return returns the level handler
      */
     public LevelHandler getMyLevelHandler(){ return myLevelHandler;}
+
+    public void passReplay(boolean replay){
+        if(replay == true){
+            myLevelHandler.initializeLevel(myLevelHandler.getLevel());
+        }
+    }
 }

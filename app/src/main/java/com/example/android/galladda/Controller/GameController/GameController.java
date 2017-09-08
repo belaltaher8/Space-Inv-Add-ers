@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.example.android.galladda.Activities.GameOverActivity;
 import com.example.android.galladda.Activities.QuestionActivity;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 import com.example.android.galladda.Model.GameModel.GameModel;
@@ -89,6 +90,12 @@ public class GameController implements Runnable{
                 executeChallengeOfType(myGameModel.getMyChallengeHandler().getMyChallengeType());
                 myGameModel.getMyChallengeHandler().getMyChallengeEngine().reset();
             }
+            else if(myGameModel.getMyLevelHandler().checkIfPlayerDied() == true){
+
+                //If the player dies, execute a game over activity
+                executeGameOverScreen();
+                myGameModel.getMyLevelHandler().getMyLivesEngine().reset();
+            }
         }
     }
 
@@ -151,8 +158,20 @@ public class GameController implements Runnable{
         myActivity.startActivityForResult(intent, 1);
     }
 
+    private void executeGameOverScreen(){
+        Intent intent = new Intent();
+        intent.setClass(myContext, GameOverActivity.class);
+
+        Activity myActivity = (Activity) myContext;
+        myActivity.startActivityForResult(intent, 2);
+    }
+
     public void passNumOfTimesWrong(int num){
         myGameModel.passNumOfTimesWrong(num);
+    }
+
+    public void passReplay(boolean replay){
+        myGameModel.passReplay(replay);
     }
 
 
