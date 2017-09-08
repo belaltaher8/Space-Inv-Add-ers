@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.example.android.galladda.EntityComponent.Entities.Bullets.BulletEntity;
-import com.example.android.galladda.EntityComponent.Entities.Bullets.GoodBulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 import com.example.android.galladda.EntityComponent.Entities.Explosion.ExplosionEntity;
 import com.example.android.galladda.EntityComponent.Entities.Player.PlayerEntity;

@@ -1,13 +1,8 @@
 package com.example.android.galladda.Model.Engines;
 
-import android.content.Entity;
-import android.util.Log;
-
 import com.example.android.galladda.EntityComponent.Components.ComponentType;
 import com.example.android.galladda.EntityComponent.Components.PositionComponent;
 import com.example.android.galladda.EntityComponent.Components.VelocityComponent;
-import com.example.android.galladda.EntityComponent.Entities.Bullets.BadBulletEntity;
-import com.example.android.galladda.EntityComponent.Entities.Bullets.BulletEntity;
 import com.example.android.galladda.EntityComponent.Entities.General.AbstractEntity;
 import com.example.android.galladda.EntityComponent.Entities.General.EntityManager;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
