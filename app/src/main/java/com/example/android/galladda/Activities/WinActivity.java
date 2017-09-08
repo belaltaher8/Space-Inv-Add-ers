@@ -10,12 +10,10 @@ import android.widget.Button;
 import com.example.android.galladda.R;
 
 /**
- * Created by Belal Taher on 9/7/2017.
+ * Created by Belal Taher on 9/8/2017.
  */
 
-public class GameOverActivity extends AppCompatActivity {
-
-    public static final int RESUME = 1;
+public class WinActivity extends AppCompatActivity {
 
     /**
      * This method is called on creation of the activity
@@ -26,17 +24,19 @@ public class GameOverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Sets the view to the activity_instructions.xml file in the res/layout folder
-        setContentView(R.layout.activity_gameover);
+        setContentView(R.layout.activity_win);
 
-        Button tryAgainButton = (Button) findViewById(R.id.try_again_button);
+        Button winButton = (Button) findViewById(R.id.go_back_button);
 
-        tryAgainButton.setOnClickListener(new View.OnClickListener() {
+        winButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(RESUME);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                Intent i = new Intent(view.getContext(), MainActivity.class);
+                startActivity(i);
                 finish();
             }
         });
+
+
     }
 }

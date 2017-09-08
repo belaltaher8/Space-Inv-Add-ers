@@ -21,6 +21,7 @@
         <activity android:name=".Activities.SecondInstructionActivity"></activity>
         <activity android:name=".Activities.GameActivity"></activity>
         <activity android:name=".Activities.GameOverActivity"></activity>
+        <activity android:name=".Activities.WinActivity"></activity>
     </application>
 
 </manifest>

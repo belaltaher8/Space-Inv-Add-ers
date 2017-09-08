@@ -2,6 +2,7 @@ package com.example.android.galladda.View.QuestionView;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Layout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.android.galladda.R;
@@ -58,7 +60,7 @@ public class PuzzleView extends QuestionView {
         questionText.setText("What is the name of the following shape?");
 
 
-        FrameLayout myFrame = new FrameLayout(context);
+        RelativeLayout myFrame = new RelativeLayout(context);
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT,
                 0,
@@ -68,25 +70,26 @@ public class PuzzleView extends QuestionView {
 
         ImageView myImageView = new ImageView(context);
         if(shape.equals("Square")){
-            myImageView.setBackgroundResource(R.drawable.square);
+            myImageView.setImageResource(R.drawable.square);
         }
         else if(shape.equals("Triangle")){
-            myImageView.setBackgroundResource(R.drawable.triangle);
+            myImageView.setImageResource(R.drawable.triangle);
         }
         else if(shape.equals("Rectangle")){
-            myImageView.setBackgroundResource(R.drawable.rectangle);
+            myImageView.setImageResource(R.drawable.rectangle);
         }
         else if(shape.equals("Circle")){
-            myImageView.setBackgroundResource(R.drawable.circle);
+            myImageView.setImageResource(R.drawable.circle);
         }
 
-        LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(
+        RelativeLayout.LayoutParams param2 = new RelativeLayout.LayoutParams(
                 LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT
+                LayoutParams.MATCH_PARENT
         );
-        param2.gravity = Gravity.CENTER;
-        myImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        myImageView.setAdjustViewBounds(true);
+
+        myImageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        param2.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        myImageView.setLayoutParams(param2);
 
         myFrame.addView(myImageView);
         this.addView(myFrame);

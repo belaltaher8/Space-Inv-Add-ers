@@ -29,6 +29,8 @@ import static android.R.attr.verticalSpacing;
 
 public class LevelHandler {
 
+    boolean beatTheGame = false;
+
     //Current level
     int level;
 
@@ -114,7 +116,21 @@ public class LevelHandler {
             currentLevelEM.addEnemy(enemyToAdd);
 
         }
+        else if(currentLevel == 3){
+            AbstractEnemy enemyToAdd = new MathEnemyEntity();
+            PositionComponent enemyPC = (PositionComponent) enemyToAdd.getComponent(ComponentType.Position);
+            enemyPC.setY(verticalSpacing);
+            enemyPC.setX(enemyMiddle);
+            currentLevelEM.addEnemy(enemyToAdd);
+        }
+        else{
+            beatTheGame = true;
+        }
         level = currentLevel;
+    }
+
+    public boolean checkIfWon(){
+        return beatTheGame;
     }
 
     /**

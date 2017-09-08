@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.example.android.galladda.Activities.GameOverActivity;
 import com.example.android.galladda.Activities.QuestionActivity;
+import com.example.android.galladda.Activities.WinActivity;
 import com.example.android.galladda.EntityComponent.Entities.Enum.EntityType;
 import com.example.android.galladda.Model.GameModel.GameModel;
 import com.example.android.galladda.View.GameView.GameView;
@@ -79,6 +80,10 @@ public class GameController implements Runnable{
         //While the boolean flag to play is true (a.k.a the game is NOT paused)
         while (playing){
 
+            if(myGameModel.getMyLevelHandler().checkIfWon() == true){
+                executeWinScreen();
+            }
+
             //play the game
             playGame();
 
@@ -102,6 +107,18 @@ public class GameController implements Runnable{
                 myGameModel.getMyLevelHandler().getMyLevelEngine().reset();
             }
         }
+    }
+
+    private void executeWinScreen(){
+
+        Intent intent = new Intent();
+        intent.setClass(myContext, WinActivity.class);
+
+        Activity myActivity = (Activity) myContext;
+        //Starts the question activity
+        myActivity.startActivity(intent);
+        myActivity.finish();
+        myActivity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     /**
